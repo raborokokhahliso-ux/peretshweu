@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { CalendarDays } from "lucide-react";
 
 const teamRoles = [
   { role: "Project Manager", desc: "Oversees project timeline, deliverables, and team coordination." },
