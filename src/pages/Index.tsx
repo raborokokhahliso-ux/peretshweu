@@ -9,10 +9,10 @@ import mohobeloImg from "@/assets/mohobelo.jpg";
 
 const dances = [
   {
-    title: "Ho Kgiba",
+    title: "Mokhibo",
     subtitle: "Traditional Sotho Dance",
     image: hoKgibaImg,
-    link: "/dances/ho-kgiba",
+    link: "/dances/mokhibo",
     description: "A vibrant traditional dance of the Basotho people, expressing joy and cultural pride through rhythmic movement.",
   },
   {
@@ -54,7 +54,7 @@ const Index = () => {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base">
-              <Link to="/dances/ho-kgiba">
+              <Link to="/dances/mokhibo">
                 Explore Dances <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
