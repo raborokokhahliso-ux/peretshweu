@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 import pantsulaImg from "@/assets/pantsula.jpg";
 import mohobeloImg from "@/assets/mohobelo.jpg";
+import litolobonyaImg from "@/assets/litolobonya.jpg";
 
 const danceData: Record<string, {
   title: string; subtitle: string; image: string;
