@@ -12,7 +12,7 @@ const dances = [
     title: "Mokhibo",
     subtitle: "Traditional Sotho Dance",
     image: hoKgibaImg,
-    link: "/dances/ho-kgiba",
+    link: "/dances/mokhibo",
     description: "A vibrant traditional dance of the Basotho people, expressing joy and cultural pride through rhythmic movement.",
   },
   {
