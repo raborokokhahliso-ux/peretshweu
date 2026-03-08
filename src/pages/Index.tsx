@@ -9,7 +9,7 @@ import mohobeloImg from "@/assets/mohobelo.jpg";
 
 const dances = [
   {
-    title: "Ho Kgiba",
+    title: "Mokhibo",
     subtitle: "Traditional Sotho Dance",
     image: hoKgibaImg,
     link: "/dances/ho-kgiba",
