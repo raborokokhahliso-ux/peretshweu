@@ -30,6 +30,13 @@ const dances = [
     link: "/dances/mohobelo",
     description: "A powerful traditional men's dance featuring dramatic stomping and athletic choreography.",
   },
+  {
+    title: "Litolobonya",
+    subtitle: "Basotho Praise Dance",
+    image: litolobonyaImg,
+    link: "/dances/litolobonya",
+    description: "A traditional praise dance combining dramatic movement with oral poetry to honour ancestors and community leaders.",
+  },
 ];
 
 const Index = () => {
