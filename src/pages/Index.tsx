@@ -6,6 +6,7 @@ import heroImg from "@/assets/hero-dance.jpg";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 import pantsulaImg from "@/assets/pantsula.jpg";
 import mohobeloImg from "@/assets/mohobelo.jpg";
+import litolobonyaImg from "@/assets/litolobonya.jpg";
 
 const dances = [
   {
