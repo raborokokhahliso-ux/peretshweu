@@ -6,6 +6,7 @@ import heroImg from "@/assets/hero-dance.jpg";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 import pantsulaImg from "@/assets/pantsula.jpg";
 import mohobeloImg from "@/assets/mohobelo.jpg";
+import litolobonyaImg from "@/assets/litolobonya.jpg";
 
 const dances = [
   {
@@ -28,6 +29,13 @@ const dances = [
     image: mohobeloImg,
     link: "/dances/mohobelo",
     description: "A powerful traditional men's dance featuring dramatic stomping and athletic choreography.",
+  },
+  {
+    title: "Litolobonya",
+    subtitle: "Basotho Praise Dance",
+    image: litolobonyaImg,
+    link: "/dances/litolobonya",
+    description: "A traditional praise dance combining dramatic movement with oral poetry to honour ancestors and community leaders.",
   },
 ];
 

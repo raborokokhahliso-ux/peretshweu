@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 import pantsulaImg from "@/assets/pantsula.jpg";
 import mohobeloImg from "@/assets/mohobelo.jpg";
+import litolobonyaImg from "@/assets/litolobonya.jpg";
 
 const danceData: Record<string, {
   title: string; subtitle: string; image: string;
@@ -42,6 +43,17 @@ const danceData: Record<string, {
     music: "Rhythmic chanting, whistles, and the lesiba (mouth bow) accompany the powerful stomping beats created by the dancers themselves.",
     costumes: "Traditional Basotho blankets, animal skins, bare feet, and mokorotlo hats. Ankle rattles amplify the footwork.",
     choreography: "Competitive formations with dramatic stomping sequences, high kicks, acrobatic leaps, and synchronised group movements.",
+  },
+  "litolobonya": {
+    title: "Litolobonya",
+    subtitle: "Traditional Basotho Praise Dance",
+    image: litolobonyaImg,
+    history: "Litolobonya is a traditional Basotho dance form deeply rooted in the praise poetry (lithoko) tradition. Originating from the highlands of Lesotho and the Free State, this dance has been performed for centuries as an accompaniment to oral recitations honouring chiefs, ancestors, and community heroes. It evolved as a physical expression of the spoken word, combining movement with poetic rhythm.",
+    significance: "In the Mangaung community, Litolobonya is performed during heritage celebrations, leadership ceremonies, and cultural festivals. It serves as a living archive of community history, with each performance retelling the stories of important figures and events. The dance reinforces respect for elders and traditional leadership structures.",
+    artistic: "Litolobonya combines dramatic gestures, sweeping arm movements, and powerful stances that mirror the intensity of praise poetry. Performers embody the characters and events described in the lithoko, creating a visual narrative.",
+    music: "Praise poetry recitation (lithoko), rhythmic clapping, and traditional drums provide the sonic landscape for the performance.",
+    costumes: "Traditional Basotho blankets, animal-skin accessories, beaded ornaments, and ceremonial headwear reflecting status and heritage.",
+    choreography: "Solo and group formations with dramatic poses, sweeping gestures, and rhythmic footwork synchronised to the cadence of praise poetry.",
   },
 };
 
