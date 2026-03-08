@@ -10,8 +10,8 @@ const danceData: Record<string, {
   history: string; significance: string; artistic: string;
   music: string; costumes: string; choreography: string;
 }> = {
-  "ho-kgiba": {
-    title: "Ho Kgiba",
+  "mokhibo": {
+    title: "Mokhibo",
     subtitle: "Traditional Sotho Dance",
     image: hoKgibaImg,
     history: "Ho Kgiba is a traditional Basotho dance that has been performed for centuries in the Free State region of South Africa. Rooted in the customs of the Basotho people, this dance form evolved from communal celebrations and rites of passage. It has been passed down through generations as an integral part of Sesotho cultural identity, adapting over time while maintaining its core movements and spiritual significance.",
