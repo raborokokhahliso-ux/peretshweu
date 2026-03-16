@@ -27,12 +27,12 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop */}
-        <ul className="hidden md:flex items-center gap-1">
+        <ul className="hidden md:flex items-center justify-end gap-1 flex-1 ml-4 flex-wrap">
           {navLinks.map((l) => (
             <li key={l.to}>
               <Link
                 to={l.to}
-                className={`px-3 py-2 rounded-md text-sm font-semibold transition-colors hover:bg-primary hover:text-primary-foreground ${
+                className={`px-2.5 py-2 rounded-md text-xs lg:text-sm font-semibold transition-colors hover:bg-primary hover:text-primary-foreground ${
                   location.pathname === l.to ? "bg-primary text-primary-foreground" : ""
                 }`}
               >
