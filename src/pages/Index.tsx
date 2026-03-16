@@ -100,9 +100,9 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-4">Featured Dances</h2>
           <p className="text-muted-foreground text-center mb-12 max-w-xl mx-auto">
-            Discover the three dance traditions we've researched and documented from the Mangaung community.
+            Discover the five dance traditions we've researched and documented from the Mangaung community.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {dances.map((dance, i) => (
               <Link to={dance.link} key={dance.title} className="group">
                 <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-card">
