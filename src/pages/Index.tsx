@@ -7,6 +7,7 @@ import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 import pantsulaImg from "@/assets/pantsula.jpg";
 import mohobeloImg from "@/assets/mohobelo.jpg";
 import litolobonyaImg from "@/assets/litolobonya.jpg";
+import gumbootsImg from "@/assets/gumboots.jpg";
 
 const dances = [
   {
@@ -36,6 +37,13 @@ const dances = [
     image: litolobonyaImg,
     link: "/dances/litolobonya",
     description: "A traditional praise dance combining dramatic movement with oral poetry to honour ancestors and community leaders.",
+  },
+  {
+    title: "Gumboots",
+    subtitle: "Isicathulo – Boot Dance",
+    image: gumbootsImg,
+    link: "/dances/gumboots",
+    description: "Born in the mines, Gumboot dance uses rhythmic boot-slapping and stomping as a powerful form of communication and cultural expression.",
   },
 ];
 

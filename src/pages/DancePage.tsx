@@ -5,6 +5,7 @@ import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 import pantsulaImg from "@/assets/pantsula.jpg";
 import mohobeloImg from "@/assets/mohobelo.jpg";
 import litolobonyaImg from "@/assets/litolobonya.jpg";
+import gumbootsImg from "@/assets/gumboots.jpg";
 
 const danceData: Record<string, {
   title: string; subtitle: string; image: string;
@@ -54,6 +55,17 @@ const danceData: Record<string, {
     music: "Praise poetry recitation (lithoko), rhythmic clapping, and traditional drums provide the sonic landscape for the performance.",
     costumes: "Traditional Basotho blankets, animal-skin accessories, beaded ornaments, and ceremonial headwear reflecting status and heritage.",
     choreography: "Solo and group formations with dramatic poses, sweeping gestures, and rhythmic footwork synchronised to the cadence of praise poetry.",
+  },
+  "gumboots": {
+    title: "Gumboots",
+    subtitle: "Isicathulo – Boot Dance",
+    image: gumbootsImg,
+    history: "Gumboot dance (Isicathulo) originated in the gold and coal mines of South Africa during the 19th and early 20th centuries. Migrant workers from across southern Africa, forced to work in harsh conditions, were often forbidden from speaking to one another. They developed a coded communication system using rhythmic boot slapping and stomping. Over time, this evolved into a celebrated dance form that spread to communities across the country, including Mangaung.",
+    significance: "In Mangaung, Gumboot dance represents the resilience and creativity of South Africa's working-class communities. It is performed at cultural festivals, school events, and heritage celebrations, serving as a powerful reminder of the struggles endured during apartheid and the mining era. The dance fosters unity and collective identity among performers and audiences alike.",
+    artistic: "Gumboot dance is characterised by rhythmic stamping, slapping of Wellington boots, and percussive body movements. Dancers create complex polyrhythmic patterns using their boots as instruments, often incorporating call-and-response elements.",
+    music: "The boots themselves serve as the primary instrument, supplemented by clapping, chanting, and sometimes guitar or concertina accompaniment.",
+    costumes: "Wellington rubber boots (gumboots), overalls or work clothes, hard hats, and sometimes colourful additions like beaded anklets or team uniforms.",
+    choreography: "Highly synchronised group formations with intricate stamping patterns, boot-slapping sequences, leg lifts, and competitive freestyle sections.",
   },
 };
 
