@@ -142,7 +142,7 @@ const DancePage = () => {
           {/* Video Placeholder */}
           <div className="mb-14">
             <h2 className="font-display text-2xl md:text-3xl font-bold mb-6">Performance Video</h2>
-            <VideoEmbed storageKey={`dance-video-${slug}`} title={`${dance.title} Performance`} />
+            <VideoEmbed key={slug} storageKey={`dance-video-${slug}`} title={`${dance.title} Performance`} />
           </div>
 
           {/* Photo Gallery Placeholder */}
