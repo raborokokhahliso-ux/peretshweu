@@ -2,7 +2,7 @@ import galleryImg from "@/assets/gallery-placeholder.jpg";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 import pantsulaImg from "@/assets/pantsula.jpg";
 import mohobeloImg from "@/assets/mohobelo.jpg";
-import { Play } from "lucide-react";
+import VideoEmbed from "@/components/VideoEmbed";
 
 const photos = [
   { src: hoKgibaImg, alt: "Ho Kgiba dancers", label: "Ho Kgiba Performance" },
