@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom"; 
-import { ArrowLeft, Play, Music, Palette, Users } from "lucide-react";
+import { ArrowLeft, Music, Palette, Users } from "lucide-react";
+import VideoEmbed from "@/components/VideoEmbed";
 import { Button } from "@/components/ui/button";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 import pantsulaImg from "@/assets/pantsula.jpg";
