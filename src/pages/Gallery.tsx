@@ -2,7 +2,7 @@ import galleryImg from "@/assets/gallery-placeholder.jpg";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 import pantsulaImg from "@/assets/pantsula.jpg";
 import mohobeloImg from "@/assets/mohobelo.jpg";
-import { Play } from "lucide-react";
+import VideoEmbed from "@/components/VideoEmbed";
 
 const photos = [
   { src: hoKgibaImg, alt: "Ho Kgiba dancers", label: "Ho Kgiba Performance" },
@@ -52,15 +52,7 @@ const Gallery = () => (
         <h2 className="font-display text-2xl md:text-3xl font-bold mb-8">Videos</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {["Ho Kgiba Performance", "Pantsula Crew Battle", "Mohobelo Initiation Dance"].map((title) => (
-            <div key={title} className="aspect-video bg-card rounded-xl flex items-center justify-center border border-border shadow-sm">
-              <div className="text-center">
-                <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-3">
-                  <Play className="h-6 w-6 text-primary" />
-                </div>
-                <p className="text-sm text-muted-foreground font-medium">{title}</p>
-                <p className="text-xs text-muted-foreground/60 mt-1">Video placeholder</p>
-              </div>
-            </div>
+            <VideoEmbed key={title} storageKey={`gallery-video-${title}`} title={title} />
           ))}
         </div>
       </div>

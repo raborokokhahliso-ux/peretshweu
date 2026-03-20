@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom"; 
-import { ArrowLeft, Play, Music, Palette, Users } from "lucide-react";
+import { ArrowLeft, Music, Palette, Users } from "lucide-react";
+import VideoEmbed from "@/components/VideoEmbed";
 import { Button } from "@/components/ui/button";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 import pantsulaImg from "@/assets/pantsula.jpg";
@@ -141,14 +142,7 @@ const DancePage = () => {
           {/* Video Placeholder */}
           <div className="mb-14">
             <h2 className="font-display text-2xl md:text-3xl font-bold mb-6">Performance Video</h2>
-            <div className="aspect-video bg-muted rounded-xl flex items-center justify-center border border-border">
-              <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-3">
-                  <Play className="h-7 w-7 text-primary" />
-                </div>
-                <p className="text-sm text-muted-foreground">Video placeholder — embed your performance video here</p>
-              </div>
-            </div>
+            <VideoEmbed storageKey={`dance-video-${slug}`} title={`${dance.title} Performance`} />
           </div>
 
           {/* Photo Gallery Placeholder */}
