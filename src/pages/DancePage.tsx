@@ -14,6 +14,16 @@ import litolobonya2 from "@/assets/litolobonya-2.jpg";
 import litolobonya3 from "@/assets/litolobonya-3.jpg";
 import litolobonya4 from "@/assets/litolobonya-4.jpg";
 import litolobonya5 from "@/assets/litolobonya-5.jpg";
+import mokhibo1 from "@/assets/mokhibo-1.jpg";
+import mokhibo2 from "@/assets/mokhibo-2.jpg";
+import mokhibo3 from "@/assets/mokhibo-3.jpg";
+import mokhibo4 from "@/assets/mokhibo-4.jpg";
+import mohobelo1 from "@/assets/mohobelo-1.jpg";
+import mohobelo2 from "@/assets/mohobelo-2.jpg";
+import mohobelo3 from "@/assets/mohobelo-3.jpg";
+import gumboots1 from "@/assets/gumboots-1.jpg";
+import gumboots2 from "@/assets/gumboots-2.jpg";
+import gumboots3 from "@/assets/gumboots-3.jpg";
 
 const danceData: Record<string, {
   title: string; subtitle: string; image: string;
