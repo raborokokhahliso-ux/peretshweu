@@ -3,7 +3,7 @@ import { ArrowLeft, Music, Palette, Users } from "lucide-react";
 import VideoEmbed from "@/components/VideoEmbed";
 import { Button } from "@/components/ui/button";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
-import pantsulaImg from "@/assets/pantsula.jpg";
+
 import mohobeloImg from "@/assets/mohobelo.jpg";
 import litolobonyaImg from "@/assets/litolobonya.jpg";
 import gumbootsImg from "@/assets/gumboots.jpg";
