@@ -71,6 +71,7 @@ const danceData: Record<string, {
 const DancePage = () => {
   const { slug } = useParams();
   const dance = danceData[slug || ""];
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   if (!dance) {
     return (
