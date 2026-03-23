@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Play, ArrowRight } from "lucide-react";
 import heroImg from "@/assets/hero-dance.jpg";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
-import pantsulaImg from "@/assets/pantsula.jpg";
+
 import mohobeloImg from "@/assets/mohobelo.jpg";
 import litolobonyaImg from "@/assets/litolobonya.jpg";
 import gumbootsImg from "@/assets/gumboots.jpg";
@@ -16,13 +16,6 @@ const dances = [
     image: hoKgibaImg,
     link: "/dances/mokhibo",
     description: "A vibrant traditional dance of the Basotho people, expressing joy and cultural pride through rhythmic movement.",
-  },
-  {
-    title: "Pantsula",
-    subtitle: "Township Dance",
-    image: pantsulaImg,
-    link: "/dances/pantsula",
-    description: "Born in the townships, Pantsula is an energetic street dance style that became a powerful form of expression.",
   },
   {
     title: "Mohobelo",

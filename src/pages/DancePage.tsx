@@ -3,7 +3,7 @@ import { ArrowLeft, Music, Palette, Users } from "lucide-react";
 import VideoEmbed from "@/components/VideoEmbed";
 import { Button } from "@/components/ui/button";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
-import pantsulaImg from "@/assets/pantsula.jpg";
+
 import mohobeloImg from "@/assets/mohobelo.jpg";
 import litolobonyaImg from "@/assets/litolobonya.jpg";
 import gumbootsImg from "@/assets/gumboots.jpg";
@@ -23,17 +23,6 @@ const danceData: Record<string, {
     music: "Traditional drums (moropa), ululations, and call-and-response chanting form the musical backbone.",
     costumes: "Basotho blankets (seanamarena), beaded accessories, grass skirts, and mokorotlo (conical hat).",
     choreography: "Synchronised group formations with dynamic footwork, rhythmic stamping, and expressive upper-body movements.",
-  },
-  "pantsula": {
-    title: "Pantsula",
-    subtitle: "Township Dance",
-    image: pantsulaImg,
-    history: "Pantsula emerged in the 1950s–1960s in the Black townships of South Africa, particularly in Johannesburg's Soweto. Born out of resistance and resilience during the apartheid era, it became a powerful cultural movement. The dance spread to communities across South Africa including Mangaung, where it was embraced by the youth as a form of self-expression and identity.",
-    significance: "Pantsula is more than a dance — it's a lifestyle and cultural statement. In Mangaung, Pantsula crews represent community pride, discipline, and creativity. The dance has been instrumental in keeping youth engaged, fostering teamwork, and providing an alternative to street life. It remains a symbol of township culture and resilience.",
-    artistic: "Pantsula is known for its fast, synchronised footwork, smooth gliding movements, and sharp body isolations. It draws from jazz, disco, and traditional African dance elements.",
-    music: "Kwaito, house music, and jazz-influenced beats provide the rhythmic foundation for Pantsula performances.",
-    costumes: "Smart-casual township fashion: Converse sneakers, Dickies pants, bucket hats, and coordinated crew outfits.",
-    choreography: "Highly synchronised group routines with intricate footwork patterns, spins, and freestyle sections.",
   },
   "mohobelo": {
     title: "Mohobelo",

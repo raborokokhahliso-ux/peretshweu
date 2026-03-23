@@ -1,12 +1,12 @@
 import galleryImg from "@/assets/gallery-placeholder.jpg";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
-import pantsulaImg from "@/assets/pantsula.jpg";
+
 import mohobeloImg from "@/assets/mohobelo.jpg";
 import VideoEmbed from "@/components/VideoEmbed";
 
 const photos = [
   { src: hoKgibaImg, alt: "Ho Kgiba dancers", label: "Ho Kgiba Performance" },
-  { src: pantsulaImg, alt: "Pantsula dancer", label: "Pantsula Street Dance" },
+  
   { src: mohobeloImg, alt: "Mohobelo dancers", label: "Mohobelo Warriors" },
   { src: galleryImg, alt: "Dance celebration", label: "Community Celebration" },
 ];
@@ -51,7 +51,7 @@ const Gallery = () => (
       <div className="container mx-auto px-4">
         <h2 className="font-display text-2xl md:text-3xl font-bold mb-8">Videos</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {["Ho Kgiba Performance", "Pantsula Crew Battle", "Mohobelo Initiation Dance"].map((title) => (
+          {["Ho Kgiba Performance", "Mohobelo Initiation Dance"].map((title) => (
             <VideoEmbed key={title} storageKey={`gallery-video-${title}`} title={title} />
           ))}
         </div>
