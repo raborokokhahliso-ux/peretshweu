@@ -145,11 +145,18 @@ const DancePage = () => {
           <div>
             <h2 className="font-display text-2xl md:text-3xl font-bold mb-6">Photo Gallery</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="aspect-square bg-muted rounded-lg flex items-center justify-center border border-border">
-                  <span className="text-muted-foreground text-sm">Photo {i + 1}</span>
-                </div>
-              ))}
+              {dance.photos && dance.photos.length > 0
+                ? dance.photos.map((photo, i) => (
+                    <div key={i} className="aspect-square overflow-hidden rounded-lg border border-border">
+                      <img src={photo} alt={`${dance.title} photo ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                    </div>
+                  ))
+                : Array.from({ length: 6 }).map((_, i) => (
+                    <div key={i} className="aspect-square bg-muted rounded-lg flex items-center justify-center border border-border">
+                      <span className="text-muted-foreground text-sm">Photo {i + 1}</span>
+                    </div>
+                  ))
+              }
             </div>
           </div>
         </div>
