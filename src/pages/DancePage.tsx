@@ -42,6 +42,7 @@ const danceData: Record<string, {
     costumes: "Basotho blankets (seanamarena), beaded accessories, grass skirts, and mokorotlo (conical hat).",
     choreography: "Synchronised group formations with dynamic footwork, rhythmic stamping, and expressive upper-body movements.",
     photos: [mokhibo1, mokhibo2, mokhibo3, mokhibo4],
+  },
   "mohobelo": {
     title: "Mohobelo",
     subtitle: "Traditional Basotho Men's Dance",
@@ -53,6 +54,7 @@ const danceData: Record<string, {
     costumes: "Traditional Basotho blankets, animal skins, bare feet, and mokorotlo hats. Ankle rattles amplify the footwork.",
     choreography: "Competitive formations with dramatic stomping sequences, high kicks, acrobatic leaps, and synchronised group movements.",
     photos: [mohobelo1, mohobelo2, mohobelo3],
+  },
   "litolobonya": {
     title: "Litolobonya",
     subtitle: "Traditional Basotho Praise Dance",
