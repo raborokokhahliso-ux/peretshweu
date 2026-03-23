@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom"; 
-import { ArrowLeft, Music, Palette, Users } from "lucide-react";
+import { ArrowLeft, Music, Palette, Users, X, ChevronLeft, ChevronRight } from "lucide-react";
 import VideoEmbed from "@/components/VideoEmbed";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 
 import mohobeloImg from "@/assets/mohobelo.jpg";
