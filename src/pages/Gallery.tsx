@@ -6,7 +6,7 @@ import VideoEmbed from "@/components/VideoEmbed";
 
 const photos = [
   { src: hoKgibaImg, alt: "Ho Kgiba dancers", label: "Ho Kgiba Performance" },
-  { src: pantsulaImg, alt: "Pantsula dancer", label: "Pantsula Street Dance" },
+  
   { src: mohobeloImg, alt: "Mohobelo dancers", label: "Mohobelo Warriors" },
   { src: galleryImg, alt: "Dance celebration", label: "Community Celebration" },
 ];
