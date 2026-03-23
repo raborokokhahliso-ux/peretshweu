@@ -7,11 +7,17 @@ import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 import mohobeloImg from "@/assets/mohobelo.jpg";
 import litolobonyaImg from "@/assets/litolobonya.jpg";
 import gumbootsImg from "@/assets/gumboots.jpg";
+import litolobonya1 from "@/assets/litolobonya-1.jpg";
+import litolobonya2 from "@/assets/litolobonya-2.jpg";
+import litolobonya3 from "@/assets/litolobonya-3.jpg";
+import litolobonya4 from "@/assets/litolobonya-4.jpg";
+import litolobonya5 from "@/assets/litolobonya-5.jpg";
 
 const danceData: Record<string, {
   title: string; subtitle: string; image: string;
   history: string; significance: string; artistic: string;
   music: string; costumes: string; choreography: string;
+  photos?: string[];
 }> = {
   "mokhibo": {
     title: "Mokhibo",
@@ -45,6 +51,7 @@ const danceData: Record<string, {
     music: "Praise poetry recitation (lithoko), rhythmic clapping, and traditional drums provide the sonic landscape for the performance.",
     costumes: "Traditional Basotho blankets, animal-skin accessories, beaded ornaments, and ceremonial headwear reflecting status and heritage.",
     choreography: "Solo and group formations with dramatic poses, sweeping gestures, and rhythmic footwork synchronised to the cadence of praise poetry.",
+    photos: [litolobonya1, litolobonya2, litolobonya3, litolobonya4, litolobonya5],
   },
   "gumboots": {
     title: "Gumboots",
@@ -138,11 +145,18 @@ const DancePage = () => {
           <div>
             <h2 className="font-display text-2xl md:text-3xl font-bold mb-6">Photo Gallery</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="aspect-square bg-muted rounded-lg flex items-center justify-center border border-border">
-                  <span className="text-muted-foreground text-sm">Photo {i + 1}</span>
-                </div>
-              ))}
+              {dance.photos && dance.photos.length > 0
+                ? dance.photos.map((photo, i) => (
+                    <div key={i} className="aspect-square overflow-hidden rounded-lg border border-border">
+                      <img src={photo} alt={`${dance.title} photo ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                    </div>
+                  ))
+                : Array.from({ length: 6 }).map((_, i) => (
+                    <div key={i} className="aspect-square bg-muted rounded-lg flex items-center justify-center border border-border">
+                      <span className="text-muted-foreground text-sm">Photo {i + 1}</span>
+                    </div>
+                  ))
+              }
             </div>
           </div>
         </div>
