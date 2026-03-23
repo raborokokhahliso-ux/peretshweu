@@ -51,6 +51,7 @@ const danceData: Record<string, {
     music: "Praise poetry recitation (lithoko), rhythmic clapping, and traditional drums provide the sonic landscape for the performance.",
     costumes: "Traditional Basotho blankets, animal-skin accessories, beaded ornaments, and ceremonial headwear reflecting status and heritage.",
     choreography: "Solo and group formations with dramatic poses, sweeping gestures, and rhythmic footwork synchronised to the cadence of praise poetry.",
+    photos: [litolobonya1, litolobonya2, litolobonya3, litolobonya4, litolobonya5],
   },
   "gumboots": {
     title: "Gumboots",
