@@ -75,7 +75,7 @@ const danceData: Record<string, {
     music: "The boots themselves serve as the primary instrument, supplemented by clapping, chanting, and sometimes guitar or concertina accompaniment.",
     costumes: "Wellington rubber boots (gumboots), overalls or work clothes, hard hats, and sometimes colourful additions like beaded anklets or team uniforms.",
     choreography: "Highly synchronised group formations with intricate stamping patterns, boot-slapping sequences, leg lifts, and competitive freestyle sections.",
-  },
+    photos: [gumboots1, gumboots2, gumboots3],
 };
 
 const DancePage = () => {
