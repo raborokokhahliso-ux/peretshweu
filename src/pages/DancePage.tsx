@@ -17,6 +17,7 @@ const danceData: Record<string, {
   title: string; subtitle: string; image: string;
   history: string; significance: string; artistic: string;
   music: string; costumes: string; choreography: string;
+  photos?: string[];
 }> = {
   "mokhibo": {
     title: "Mokhibo",
