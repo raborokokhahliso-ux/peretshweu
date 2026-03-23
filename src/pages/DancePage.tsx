@@ -52,7 +52,7 @@ const danceData: Record<string, {
     music: "Rhythmic chanting, whistles, and the lesiba (mouth bow) accompany the powerful stomping beats created by the dancers themselves.",
     costumes: "Traditional Basotho blankets, animal skins, bare feet, and mokorotlo hats. Ankle rattles amplify the footwork.",
     choreography: "Competitive formations with dramatic stomping sequences, high kicks, acrobatic leaps, and synchronised group movements.",
-  },
+    photos: [mohobelo1, mohobelo2, mohobelo3],
   "litolobonya": {
     title: "Litolobonya",
     subtitle: "Traditional Basotho Praise Dance",
