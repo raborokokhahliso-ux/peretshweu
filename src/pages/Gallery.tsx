@@ -1,6 +1,6 @@
 import galleryImg from "@/assets/gallery-placeholder.jpg";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
-import pantsulaImg from "@/assets/pantsula.jpg";
+
 import mohobeloImg from "@/assets/mohobelo.jpg";
 import VideoEmbed from "@/components/VideoEmbed";
 
