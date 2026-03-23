@@ -76,6 +76,7 @@ const danceData: Record<string, {
     costumes: "Wellington rubber boots (gumboots), overalls or work clothes, hard hats, and sometimes colourful additions like beaded anklets or team uniforms.",
     choreography: "Highly synchronised group formations with intricate stamping patterns, boot-slapping sequences, leg lifts, and competitive freestyle sections.",
     photos: [gumboots1, gumboots2, gumboots3],
+  },
 };
 
 const DancePage = () => {
