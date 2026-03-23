@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom"; 
-import { ArrowLeft, Music, Palette, Users } from "lucide-react";
+import { ArrowLeft, Music, Palette, Users, X, ChevronLeft, ChevronRight } from "lucide-react";
 import VideoEmbed from "@/components/VideoEmbed";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 
 import mohobeloImg from "@/assets/mohobelo.jpg";
@@ -69,6 +71,7 @@ const danceData: Record<string, {
 const DancePage = () => {
   const { slug } = useParams();
   const dance = danceData[slug || ""];
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   if (!dance) {
     return (
@@ -147,7 +150,7 @@ const DancePage = () => {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {dance.photos && dance.photos.length > 0
                 ? dance.photos.map((photo, i) => (
-                    <div key={i} className="aspect-square overflow-hidden rounded-lg border border-border">
+                    <div key={i} className="aspect-square overflow-hidden rounded-lg border border-border cursor-pointer" onClick={() => setLightboxIndex(i)}>
                       <img src={photo} alt={`${dance.title} photo ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
                     </div>
                   ))
@@ -159,6 +162,40 @@ const DancePage = () => {
               }
             </div>
           </div>
+
+          {/* Lightbox */}
+          {dance.photos && dance.photos.length > 0 && (
+            <Dialog open={lightboxIndex !== null} onOpenChange={() => setLightboxIndex(null)}>
+              <DialogContent className="max-w-[90vw] max-h-[90vh] p-0 border-none bg-black/95 flex items-center justify-center">
+                <button onClick={() => setLightboxIndex(null)} className="absolute top-3 right-3 z-50 text-white/70 hover:text-white">
+                  <X className="h-6 w-6" />
+                </button>
+                {lightboxIndex !== null && dance.photos.length > 1 && (
+                  <>
+                    <button
+                      onClick={() => setLightboxIndex((lightboxIndex - 1 + dance.photos!.length) % dance.photos!.length)}
+                      className="absolute left-3 z-50 text-white/70 hover:text-white"
+                    >
+                      <ChevronLeft className="h-8 w-8" />
+                    </button>
+                    <button
+                      onClick={() => setLightboxIndex((lightboxIndex + 1) % dance.photos!.length)}
+                      className="absolute right-12 z-50 text-white/70 hover:text-white"
+                    >
+                      <ChevronRight className="h-8 w-8" />
+                    </button>
+                  </>
+                )}
+                {lightboxIndex !== null && (
+                  <img
+                    src={dance.photos[lightboxIndex]}
+                    alt={`${dance.title} photo ${lightboxIndex + 1}`}
+                    className="max-w-full max-h-[85vh] object-contain"
+                  />
+                )}
+              </DialogContent>
+            </Dialog>
+          )}
         </div>
       </section>
     </div>
