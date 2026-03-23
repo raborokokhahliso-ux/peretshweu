@@ -41,7 +41,7 @@ const danceData: Record<string, {
     music: "Traditional drums (moropa), ululations, and call-and-response chanting form the musical backbone.",
     costumes: "Basotho blankets (seanamarena), beaded accessories, grass skirts, and mokorotlo (conical hat).",
     choreography: "Synchronised group formations with dynamic footwork, rhythmic stamping, and expressive upper-body movements.",
-  },
+    photos: [mokhibo1, mokhibo2, mokhibo3, mokhibo4],
   "mohobelo": {
     title: "Mohobelo",
     subtitle: "Traditional Basotho Men's Dance",
