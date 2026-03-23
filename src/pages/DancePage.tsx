@@ -14,6 +14,16 @@ import litolobonya2 from "@/assets/litolobonya-2.jpg";
 import litolobonya3 from "@/assets/litolobonya-3.jpg";
 import litolobonya4 from "@/assets/litolobonya-4.jpg";
 import litolobonya5 from "@/assets/litolobonya-5.jpg";
+import mokhibo1 from "@/assets/mokhibo-1.jpg";
+import mokhibo2 from "@/assets/mokhibo-2.jpg";
+import mokhibo3 from "@/assets/mokhibo-3.jpg";
+import mokhibo4 from "@/assets/mokhibo-4.jpg";
+import mohobelo1 from "@/assets/mohobelo-1.jpg";
+import mohobelo2 from "@/assets/mohobelo-2.jpg";
+import mohobelo3 from "@/assets/mohobelo-3.jpg";
+import gumboots1 from "@/assets/gumboots-1.jpg";
+import gumboots2 from "@/assets/gumboots-2.jpg";
+import gumboots3 from "@/assets/gumboots-3.jpg";
 
 const danceData: Record<string, {
   title: string; subtitle: string; image: string;
@@ -31,6 +41,7 @@ const danceData: Record<string, {
     music: "Traditional drums (moropa), ululations, and call-and-response chanting form the musical backbone.",
     costumes: "Basotho blankets (seanamarena), beaded accessories, grass skirts, and mokorotlo (conical hat).",
     choreography: "Synchronised group formations with dynamic footwork, rhythmic stamping, and expressive upper-body movements.",
+    photos: [mokhibo1, mokhibo2, mokhibo3, mokhibo4],
   },
   "mohobelo": {
     title: "Mohobelo",
@@ -42,6 +53,7 @@ const danceData: Record<string, {
     music: "Rhythmic chanting, whistles, and the lesiba (mouth bow) accompany the powerful stomping beats created by the dancers themselves.",
     costumes: "Traditional Basotho blankets, animal skins, bare feet, and mokorotlo hats. Ankle rattles amplify the footwork.",
     choreography: "Competitive formations with dramatic stomping sequences, high kicks, acrobatic leaps, and synchronised group movements.",
+    photos: [mohobelo1, mohobelo2, mohobelo3],
   },
   "litolobonya": {
     title: "Litolobonya",
@@ -65,6 +77,7 @@ const danceData: Record<string, {
     music: "The boots themselves serve as the primary instrument, supplemented by clapping, chanting, and sometimes guitar or concertina accompaniment.",
     costumes: "Wellington rubber boots (gumboots), overalls or work clothes, hard hats, and sometimes colourful additions like beaded anklets or team uniforms.",
     choreography: "Highly synchronised group formations with intricate stamping patterns, boot-slapping sequences, leg lifts, and competitive freestyle sections.",
+    photos: [gumboots1, gumboots2, gumboots3],
   },
 };
 
