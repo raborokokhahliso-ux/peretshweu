@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useParams, Link } from "react-router-dom"; 
-import { ArrowLeft, Music, Palette, Users, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, Music, Palette, Users, X, ChevronLeft, ChevronRight, ImagePlus, Upload, Link as LinkIcon } from "lucide-react";
 import VideoEmbed from "@/components/VideoEmbed";
+import ImageEmbed from "@/components/ImageEmbed";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 
@@ -81,10 +83,98 @@ const danceData: Record<string, {
   },
 };
 
+/** Sub-component for gallery with user-added photos */
+const GalleryWithCustomPhotos = ({
+  slug, builtInPhotos, title, onPhotoClick,
+}: {
+  slug: string; builtInPhotos: string[]; title: string;
+  onPhotoClick: (allPhotos: string[], index: number) => void;
+}) => {
+  const storageKey = `dance-gallery-${slug}`;
+  const [customPhotos, setCustomPhotos] = useState<string[]>(() => {
+    try { return JSON.parse(localStorage.getItem(storageKey) || "[]"); } catch { return []; }
+  });
+  const [adding, setAdding] = useState(false);
+  const [urlInput, setUrlInput] = useState("");
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const allPhotos = [...builtInPhotos, ...customPhotos];
+
+  const addUrl = () => {
+    const trimmed = urlInput.trim();
+    if (!trimmed) return;
+    const next = [...customPhotos, trimmed];
+    localStorage.setItem(storageKey, JSON.stringify(next));
+    setCustomPhotos(next);
+    setUrlInput("");
+    setAdding(false);
+  };
+
+  const addFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const next = [...customPhotos, reader.result as string];
+      localStorage.setItem(storageKey, JSON.stringify(next));
+      setCustomPhotos(next);
+      setAdding(false);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const removeCustom = (idx: number) => {
+    const next = customPhotos.filter((_, i) => i !== idx);
+    localStorage.setItem(storageKey, JSON.stringify(next));
+    setCustomPhotos(next);
+  };
+
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      {allPhotos.map((photo, i) => (
+        <div key={i} className="relative group aspect-square overflow-hidden rounded-lg border border-border cursor-pointer" onClick={() => onPhotoClick(allPhotos, i)}>
+          <img src={photo} alt={`${title} photo ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+          {i >= builtInPhotos.length && (
+            <button
+              className="absolute top-1 right-1 z-10 bg-destructive text-destructive-foreground rounded-full h-6 w-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+              onClick={(e) => { e.stopPropagation(); removeCustom(i - builtInPhotos.length); }}
+            >
+              <X className="h-3 w-3" />
+            </button>
+          )}
+        </div>
+      ))}
+      {/* Add photo card */}
+      {adding ? (
+        <div className="aspect-square bg-muted rounded-lg border border-border p-4 flex items-center justify-center">
+          <div className="text-center w-full">
+            <Input placeholder="Paste image URL" value={urlInput} onChange={(e) => setUrlInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && addUrl()} className="text-sm mb-2" />
+            <Button size="sm" onClick={addUrl} disabled={!urlInput.trim()} className="w-full mb-2"><LinkIcon className="h-4 w-4 mr-1" /> Add URL</Button>
+            <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={addFile} />
+            <Button size="sm" variant="outline" onClick={() => fileRef.current?.click()} className="w-full mb-2"><Upload className="h-4 w-4 mr-1" /> Upload</Button>
+            <Button size="sm" variant="ghost" onClick={() => setAdding(false)} className="w-full text-muted-foreground">Cancel</Button>
+          </div>
+        </div>
+      ) : (
+        <div
+          className="aspect-square bg-muted rounded-lg border border-dashed border-border flex items-center justify-center cursor-pointer hover:bg-muted/80 transition-colors"
+          onClick={() => setAdding(true)}
+        >
+          <div className="text-center">
+            <ImagePlus className="h-8 w-8 text-muted-foreground mx-auto mb-1" />
+            <span className="text-muted-foreground text-xs">Add Photo</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const DancePage = () => {
   const { slug } = useParams();
   const dance = danceData[slug || ""];
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [allDisplayPhotos, setAllDisplayPhotos] = useState<string[]>([]);
 
   if (!dance) {
     return (
@@ -99,8 +189,13 @@ const DancePage = () => {
     <div>
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[350px] flex items-end overflow-hidden">
-        <img src={dance.image} alt={dance.title} className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/40 to-transparent" />
+        <ImageEmbed
+          storageKey={`dance-banner-${slug}`}
+          fallbackSrc={dance.image}
+          alt={dance.title}
+          className="absolute inset-0 w-full h-full"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/40 to-transparent pointer-events-none" />
         <div className="relative z-10 container mx-auto px-4 pb-10">
           <Link to="/" className="inline-flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground text-sm mb-4 transition-colors">
             <ArrowLeft className="h-4 w-4" /> Back to Home
@@ -157,42 +252,37 @@ const DancePage = () => {
             <VideoEmbed key={slug} storageKey={`dance-video-${slug}`} title={`${dance.title} Performance`} />
           </div>
 
-          {/* Photo Gallery Placeholder */}
+          {/* Photo Gallery */}
           <div>
             <h2 className="font-display text-2xl md:text-3xl font-bold mb-6">Photo Gallery</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {dance.photos && dance.photos.length > 0
-                ? dance.photos.map((photo, i) => (
-                    <div key={i} className="aspect-square overflow-hidden rounded-lg border border-border cursor-pointer" onClick={() => setLightboxIndex(i)}>
-                      <img src={photo} alt={`${dance.title} photo ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                    </div>
-                  ))
-                : Array.from({ length: 6 }).map((_, i) => (
-                    <div key={i} className="aspect-square bg-muted rounded-lg flex items-center justify-center border border-border">
-                      <span className="text-muted-foreground text-sm">Photo {i + 1}</span>
-                    </div>
-                  ))
-              }
-            </div>
+            <GalleryWithCustomPhotos
+              slug={slug || ""}
+              builtInPhotos={dance.photos || []}
+              title={dance.title}
+              onPhotoClick={(allPhotos, index) => {
+                setAllDisplayPhotos(allPhotos);
+                setLightboxIndex(index);
+              }}
+            />
           </div>
 
           {/* Lightbox */}
-          {dance.photos && dance.photos.length > 0 && (
+          {allDisplayPhotos.length > 0 && (
             <Dialog open={lightboxIndex !== null} onOpenChange={() => setLightboxIndex(null)}>
               <DialogContent className="max-w-[90vw] max-h-[90vh] p-0 border-none bg-black/95 flex items-center justify-center">
                 <button onClick={() => setLightboxIndex(null)} className="absolute top-3 right-3 z-50 text-white/70 hover:text-white">
                   <X className="h-6 w-6" />
                 </button>
-                {lightboxIndex !== null && dance.photos.length > 1 && (
+                {lightboxIndex !== null && allDisplayPhotos.length > 1 && (
                   <>
                     <button
-                      onClick={() => setLightboxIndex((lightboxIndex - 1 + dance.photos!.length) % dance.photos!.length)}
+                      onClick={() => setLightboxIndex((lightboxIndex - 1 + allDisplayPhotos.length) % allDisplayPhotos.length)}
                       className="absolute left-3 z-50 text-white/70 hover:text-white"
                     >
                       <ChevronLeft className="h-8 w-8" />
                     </button>
                     <button
-                      onClick={() => setLightboxIndex((lightboxIndex + 1) % dance.photos!.length)}
+                      onClick={() => setLightboxIndex((lightboxIndex + 1) % allDisplayPhotos.length)}
                       className="absolute right-12 z-50 text-white/70 hover:text-white"
                     >
                       <ChevronRight className="h-8 w-8" />
@@ -201,7 +291,7 @@ const DancePage = () => {
                 )}
                 {lightboxIndex !== null && (
                   <img
-                    src={dance.photos[lightboxIndex]}
+                    src={allDisplayPhotos[lightboxIndex]}
                     alt={`${dance.title} photo ${lightboxIndex + 1}`}
                     className="max-w-full max-h-[85vh] object-contain"
                   />

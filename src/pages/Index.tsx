@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Play, ArrowRight } from "lucide-react";
+import ImageEmbed from "@/components/ImageEmbed";
 import heroImg from "@/assets/hero-dance.jpg";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 
@@ -45,12 +46,13 @@ const Index = () => {
     <div>
       {/* Hero */}
       <section className="relative h-[85vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-        <img
-          src={heroImg}
+        <ImageEmbed
+          storageKey="home-hero-banner"
+          fallbackSrc={heroImg}
           alt="Traditional dancers performing in Mangaung"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-foreground/70 via-foreground/50 to-foreground/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-foreground/70 via-foreground/50 to-foreground/80 pointer-events-none" />
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <span className="inline-block bg-primary text-primary-foreground text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">
             Mangaung Community
@@ -100,10 +102,11 @@ const Index = () => {
               <Link to={dance.link} key={dance.title} className="group">
                 <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-card">
                   <div className="relative h-64 overflow-hidden">
-                    <img
-                      src={dance.image}
+                    <ImageEmbed
+                      storageKey={`home-dance-card-${dance.title}`}
+                      fallbackSrc={dance.image}
                       alt={dance.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-64"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
                     <div className="absolute bottom-4 left-4">
