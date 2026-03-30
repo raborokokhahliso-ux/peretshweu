@@ -1,22 +1,22 @@
-import { useState } from "react";
-import { Play, Link as LinkIcon, X } from "lucide-react";
+import { useState, useRef } from "react";
+import { Play, Link as LinkIcon, X, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 function getEmbedUrl(url: string): { type: "iframe" | "video"; src: string } | null {
   try {
+    // Base64 data URLs from file upload
+    if (url.startsWith("data:video/")) return { type: "video", src: url };
+
     const u = new URL(url);
-    // YouTube
     const ytMatch =
       u.hostname.includes("youtube.com") ? new URLSearchParams(u.search).get("v") :
       u.hostname === "youtu.be" ? u.pathname.slice(1) : null;
     if (ytMatch) return { type: "iframe", src: `https://www.youtube.com/embed/${ytMatch}` };
 
-    // Vimeo
     const vimeoMatch = u.hostname.includes("vimeo.com") && u.pathname.match(/\/(\d+)/);
     if (vimeoMatch) return { type: "iframe", src: `https://player.vimeo.com/video/${vimeoMatch[1]}` };
 
-    // Direct video file
     if (/\.(mp4|webm|ogg)(\?|$)/i.test(url)) return { type: "video", src: url };
 
     return null;
@@ -34,6 +34,7 @@ const VideoEmbed = ({ storageKey, title }: VideoEmbedProps) => {
   const [url, setUrl] = useState(() => localStorage.getItem(storageKey) || "");
   const [input, setInput] = useState("");
   const [editing, setEditing] = useState(!url);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   const embed = url ? getEmbedUrl(url) : null;
 
@@ -45,6 +46,19 @@ const VideoEmbed = ({ storageKey, title }: VideoEmbedProps) => {
     localStorage.setItem(storageKey, trimmed);
     setUrl(trimmed);
     setEditing(false);
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64 = reader.result as string;
+      localStorage.setItem(storageKey, base64);
+      setUrl(base64);
+      setEditing(false);
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleRemove = () => {
@@ -85,7 +99,7 @@ const VideoEmbed = ({ storageKey, title }: VideoEmbedProps) => {
         <p className="text-sm text-muted-foreground font-medium mb-4">
           {title || "Add a video"}
         </p>
-        <div className="flex gap-2">
+        <div className="flex gap-2 mb-3">
           <Input
             placeholder="Paste YouTube, Vimeo, or .mp4 URL"
             value={input}
@@ -97,6 +111,10 @@ const VideoEmbed = ({ storageKey, title }: VideoEmbedProps) => {
             <LinkIcon className="h-4 w-4" />
           </Button>
         </div>
+        <input ref={fileRef} type="file" accept="video/*" className="hidden" onChange={handleFileUpload} />
+        <Button size="sm" variant="outline" onClick={() => fileRef.current?.click()} className="w-full">
+          <Upload className="h-4 w-4 mr-2" /> Upload from device
+        </Button>
       </div>
     </div>
   );
