@@ -100,8 +100,13 @@ const DancePage = () => {
     <div>
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[350px] flex items-end overflow-hidden">
-        <img src={dance.image} alt={dance.title} className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/40 to-transparent" />
+        <ImageEmbed
+          storageKey={`dance-banner-${slug}`}
+          fallbackSrc={dance.image}
+          alt={dance.title}
+          className="absolute inset-0 w-full h-full"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/40 to-transparent pointer-events-none" />
         <div className="relative z-10 container mx-auto px-4 pb-10">
           <Link to="/" className="inline-flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground text-sm mb-4 transition-colors">
             <ArrowLeft className="h-4 w-4" /> Back to Home
