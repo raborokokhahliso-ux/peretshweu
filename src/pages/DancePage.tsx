@@ -82,10 +82,98 @@ const danceData: Record<string, {
   },
 };
 
+/** Sub-component for gallery with user-added photos */
+const GalleryWithCustomPhotos = ({
+  slug, builtInPhotos, title, onPhotoClick,
+}: {
+  slug: string; builtInPhotos: string[]; title: string;
+  onPhotoClick: (allPhotos: string[], index: number) => void;
+}) => {
+  const storageKey = `dance-gallery-${slug}`;
+  const [customPhotos, setCustomPhotos] = useState<string[]>(() => {
+    try { return JSON.parse(localStorage.getItem(storageKey) || "[]"); } catch { return []; }
+  });
+  const [adding, setAdding] = useState(false);
+  const [urlInput, setUrlInput] = useState("");
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const allPhotos = [...builtInPhotos, ...customPhotos];
+
+  const addUrl = () => {
+    const trimmed = urlInput.trim();
+    if (!trimmed) return;
+    const next = [...customPhotos, trimmed];
+    localStorage.setItem(storageKey, JSON.stringify(next));
+    setCustomPhotos(next);
+    setUrlInput("");
+    setAdding(false);
+  };
+
+  const addFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const next = [...customPhotos, reader.result as string];
+      localStorage.setItem(storageKey, JSON.stringify(next));
+      setCustomPhotos(next);
+      setAdding(false);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const removeCustom = (idx: number) => {
+    const next = customPhotos.filter((_, i) => i !== idx);
+    localStorage.setItem(storageKey, JSON.stringify(next));
+    setCustomPhotos(next);
+  };
+
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      {allPhotos.map((photo, i) => (
+        <div key={i} className="relative group aspect-square overflow-hidden rounded-lg border border-border cursor-pointer" onClick={() => onPhotoClick(allPhotos, i)}>
+          <img src={photo} alt={`${title} photo ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+          {i >= builtInPhotos.length && (
+            <button
+              className="absolute top-1 right-1 z-10 bg-destructive text-destructive-foreground rounded-full h-6 w-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+              onClick={(e) => { e.stopPropagation(); removeCustom(i - builtInPhotos.length); }}
+            >
+              <X className="h-3 w-3" />
+            </button>
+          )}
+        </div>
+      ))}
+      {/* Add photo card */}
+      {adding ? (
+        <div className="aspect-square bg-muted rounded-lg border border-border p-4 flex items-center justify-center">
+          <div className="text-center w-full">
+            <Input placeholder="Paste image URL" value={urlInput} onChange={(e) => setUrlInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && addUrl()} className="text-sm mb-2" />
+            <Button size="sm" onClick={addUrl} disabled={!urlInput.trim()} className="w-full mb-2"><LinkIcon className="h-4 w-4 mr-1" /> Add URL</Button>
+            <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={addFile} />
+            <Button size="sm" variant="outline" onClick={() => fileRef.current?.click()} className="w-full mb-2"><Upload className="h-4 w-4 mr-1" /> Upload</Button>
+            <Button size="sm" variant="ghost" onClick={() => setAdding(false)} className="w-full text-muted-foreground">Cancel</Button>
+          </div>
+        </div>
+      ) : (
+        <div
+          className="aspect-square bg-muted rounded-lg border border-dashed border-border flex items-center justify-center cursor-pointer hover:bg-muted/80 transition-colors"
+          onClick={() => setAdding(true)}
+        >
+          <div className="text-center">
+            <ImagePlus className="h-8 w-8 text-muted-foreground mx-auto mb-1" />
+            <span className="text-muted-foreground text-xs">Add Photo</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const DancePage = () => {
   const { slug } = useParams();
   const dance = danceData[slug || ""];
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [allDisplayPhotos, setAllDisplayPhotos] = useState<string[]>([]);
 
   if (!dance) {
     return (
