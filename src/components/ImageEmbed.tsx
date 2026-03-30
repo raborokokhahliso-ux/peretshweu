@@ -57,7 +57,7 @@ const ImageEmbed = ({
 
   if (editing) {
     return (
-      <div className={`bg-muted rounded-xl flex items-center justify-center border border-border p-6 ${aspectRatio || ""} ${className}`}>
+      <div className={`bg-muted rounded-xl flex items-center justify-center border border-border p-6 z-30 relative ${aspectRatio || ""} ${className}`}>
         <div className="text-center w-full max-w-md">
           <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-3">
             <ImagePlus className="h-6 w-6 text-primary" />
