@@ -267,22 +267,22 @@ const DancePage = () => {
           </div>
 
           {/* Lightbox */}
-          {dance.photos && dance.photos.length > 0 && (
+          {allDisplayPhotos.length > 0 && (
             <Dialog open={lightboxIndex !== null} onOpenChange={() => setLightboxIndex(null)}>
               <DialogContent className="max-w-[90vw] max-h-[90vh] p-0 border-none bg-black/95 flex items-center justify-center">
                 <button onClick={() => setLightboxIndex(null)} className="absolute top-3 right-3 z-50 text-white/70 hover:text-white">
                   <X className="h-6 w-6" />
                 </button>
-                {lightboxIndex !== null && dance.photos.length > 1 && (
+                {lightboxIndex !== null && allDisplayPhotos.length > 1 && (
                   <>
                     <button
-                      onClick={() => setLightboxIndex((lightboxIndex - 1 + dance.photos!.length) % dance.photos!.length)}
+                      onClick={() => setLightboxIndex((lightboxIndex - 1 + allDisplayPhotos.length) % allDisplayPhotos.length)}
                       className="absolute left-3 z-50 text-white/70 hover:text-white"
                     >
                       <ChevronLeft className="h-8 w-8" />
                     </button>
                     <button
-                      onClick={() => setLightboxIndex((lightboxIndex + 1) % dance.photos!.length)}
+                      onClick={() => setLightboxIndex((lightboxIndex + 1) % allDisplayPhotos.length)}
                       className="absolute right-12 z-50 text-white/70 hover:text-white"
                     >
                       <ChevronRight className="h-8 w-8" />
@@ -291,7 +291,7 @@ const DancePage = () => {
                 )}
                 {lightboxIndex !== null && (
                   <img
-                    src={dance.photos[lightboxIndex]}
+                    src={allDisplayPhotos[lightboxIndex]}
                     alt={`${dance.title} photo ${lightboxIndex + 1}`}
                     className="max-w-full max-h-[85vh] object-contain"
                   />

@@ -46,12 +46,13 @@ const Index = () => {
     <div>
       {/* Hero */}
       <section className="relative h-[85vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-        <img
-          src={heroImg}
+        <ImageEmbed
+          storageKey="home-hero-banner"
+          fallbackSrc={heroImg}
           alt="Traditional dancers performing in Mangaung"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-foreground/70 via-foreground/50 to-foreground/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-foreground/70 via-foreground/50 to-foreground/80 pointer-events-none" />
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <span className="inline-block bg-primary text-primary-foreground text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">
             Mangaung Community
