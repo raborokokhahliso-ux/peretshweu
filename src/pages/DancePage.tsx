@@ -163,23 +163,18 @@ const DancePage = () => {
             <VideoEmbed key={slug} storageKey={`dance-video-${slug}`} title={`${dance.title} Performance`} />
           </div>
 
-          {/* Photo Gallery Placeholder */}
+          {/* Photo Gallery */}
           <div>
             <h2 className="font-display text-2xl md:text-3xl font-bold mb-6">Photo Gallery</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {dance.photos && dance.photos.length > 0
-                ? dance.photos.map((photo, i) => (
-                    <div key={i} className="aspect-square overflow-hidden rounded-lg border border-border cursor-pointer" onClick={() => setLightboxIndex(i)}>
-                      <img src={photo} alt={`${dance.title} photo ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                    </div>
-                  ))
-                : Array.from({ length: 6 }).map((_, i) => (
-                    <div key={i} className="aspect-square bg-muted rounded-lg flex items-center justify-center border border-border">
-                      <span className="text-muted-foreground text-sm">Photo {i + 1}</span>
-                    </div>
-                  ))
-              }
-            </div>
+            <GalleryWithCustomPhotos
+              slug={slug || ""}
+              builtInPhotos={dance.photos || []}
+              title={dance.title}
+              onPhotoClick={(allPhotos, index) => {
+                setAllDisplayPhotos(allPhotos);
+                setLightboxIndex(index);
+              }}
+            />
           </div>
 
           {/* Lightbox */}
