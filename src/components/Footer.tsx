@@ -5,7 +5,7 @@ const Footer = () => (
     <div className="container mx-auto px-4">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
-          <h3 className="font-display text-xl font-bold text-gold mb-3">Mangaung Dance</h3>
+          <h3 className="font-display text-xl font-bold text-gold mb-3">Pere e Tshweu Sengangata</h3>
           <p className="text-sm opacity-80">
             Exploring and documenting the rich dance heritage of the Mangaung Community, Bloemfontein.
           </p>

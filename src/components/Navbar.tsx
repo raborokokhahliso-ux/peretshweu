@@ -23,7 +23,7 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 bg-earth text-earth-foreground shadow-lg">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
         <Link to="/" className="font-display text-xl font-bold tracking-wide text-gold">
-          Mangaung Dance
+          Pere e Tshweu Sengangata
         </Link>
 
         {/* Desktop */}
