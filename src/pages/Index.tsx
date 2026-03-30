@@ -102,10 +102,11 @@ const Index = () => {
               <Link to={dance.link} key={dance.title} className="group">
                 <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-card">
                   <div className="relative h-64 overflow-hidden">
-                    <img
-                      src={dance.image}
+                    <ImageEmbed
+                      storageKey={`home-dance-card-${dance.title}`}
+                      fallbackSrc={dance.image}
                       alt={dance.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-64"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
                     <div className="absolute bottom-4 left-4">
