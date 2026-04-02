@@ -48,6 +48,7 @@ const ImageEmbed = ({
     reader.onload = () => {
       const base64 = reader.result as string;
       localStorage.setItem(storageKey, base64);
+      markModified();
       setCustomSrc(base64);
       setEditing(false);
     };
