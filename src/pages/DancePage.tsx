@@ -11,6 +11,7 @@ import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 import mohobeloImg from "@/assets/mohobelo.jpg";
 import litolobonyaImg from "@/assets/litolobonya.jpg";
 import gumbootsImg from "@/assets/gumboots.jpg";
+import pharatlhatlhaImg from "@/assets/pharatlhatlha.jpg";
 import litolobonya1 from "@/assets/litolobonya-1.jpg";
 import litolobonya2 from "@/assets/litolobonya-2.jpg";
 import litolobonya3 from "@/assets/litolobonya-3.jpg";
@@ -80,6 +81,18 @@ const danceData: Record<string, {
     costumes: "Wellington rubber boots (gumboots), overalls or work clothes, hard hats, and sometimes colourful additions like beaded anklets or team uniforms.",
     choreography: "Highly synchronised group formations with intricate stamping patterns, boot-slapping sequences, leg lifts, and competitive freestyle sections.",
     photos: [gumboots1, gumboots2, gumboots3],
+  },
+  "pharatlhatlha": {
+    title: "Pharatlhatlha",
+    subtitle: "Traditional Basotho Rhythmic Dance",
+    image: pharatlhatlhaImg,
+    history: "Pharatlhatlha is a traditional Basotho dance characterised by rapid, rhythmic movements and energetic footwork. Originating from the rural communities of the Free State and Lesotho, this dance has been performed at gatherings, celebrations, and social events for generations. It evolved as a form of communal entertainment and expression, reflecting the joy and vitality of Basotho culture.",
+    significance: "In the Mangaung community, Pharatlhatlha is performed during community celebrations, weddings, and cultural festivals. The dance brings people together, fostering social cohesion and cultural pride. It serves as a form of expression for both young and old, preserving the rhythmic traditions of the Basotho people.",
+    artistic: "Pharatlhatlha features fast-paced footwork, rapid hip movements, and energetic body shaking. The dance demands agility and stamina, with performers moving in synchronised patterns that create a visually dynamic spectacle.",
+    music: "Traditional drums, hand clapping, and vocal chanting drive the fast-paced rhythm of the dance.",
+    costumes: "Traditional Basotho attire including blankets, skirts, and beaded accessories. Dancers often wear ankle rattles to accentuate footwork.",
+    choreography: "Fast-paced group formations with rapid footwork sequences, hip movements, and synchronised body shaking in call-and-response patterns.",
+    photos: [],
   },
 };
 
