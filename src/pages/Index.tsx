@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Play, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import VideoEmbed from "@/components/VideoEmbed";
 import ImageEmbed from "@/components/ImageEmbed";
 import heroImg from "@/assets/hero-dance.jpg";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";

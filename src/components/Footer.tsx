@@ -20,9 +20,14 @@ const Footer = () => (
           </ul>
         </div>
         <div>
-          <h4 className="font-display font-bold mb-3">Project Info</h4>
-          <p className="text-sm opacity-80">Project Management III Assignment</p>
-          <p className="text-sm opacity-80">Due: 24 April 2026</p>
+          <h4 className="font-display font-bold mb-3">Dances</h4>
+          <ul className="space-y-1 text-sm opacity-80">
+            <li><Link to="/dances/mokhibo" className="hover:text-gold transition-colors">Mokhibo</Link></li>
+            <li><Link to="/dances/mohobelo" className="hover:text-gold transition-colors">Mohobelo</Link></li>
+            <li><Link to="/dances/litolobonya" className="hover:text-gold transition-colors">Litolobonya</Link></li>
+            <li><Link to="/dances/gumboots" className="hover:text-gold transition-colors">Gumboots</Link></li>
+            <li><Link to="/dances/pharatlhatlha" className="hover:text-gold transition-colors">Pharatlhatlha</Link></li>
+          </ul>
         </div>
       </div>
       <div className="mt-8 pt-6 border-t border-earth-foreground/20 text-center text-sm opacity-60">
