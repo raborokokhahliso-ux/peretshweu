@@ -57,6 +57,7 @@ const ImageEmbed = ({
 
   const handleRemove = () => {
     localStorage.removeItem(storageKey);
+    markModified();
     setCustomSrc("");
     setEditing(false);
   };
