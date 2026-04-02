@@ -10,6 +10,7 @@ import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 import mohobeloImg from "@/assets/mohobelo.jpg";
 import litolobonyaImg from "@/assets/litolobonya.jpg";
 import gumbootsImg from "@/assets/gumboots.jpg";
+import pharatlhatlhaImg from "@/assets/pharatlhatlha.jpg";
 
 const dances = [
   {
