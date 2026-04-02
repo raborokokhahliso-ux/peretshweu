@@ -129,29 +129,17 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Video Placeholder */}
+      {/* Highlight Reel */}
       <section className="py-20 bg-earth text-earth-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Highlight Reel</h2>
           <p className="opacity-80 mb-10 max-w-xl mx-auto">
             Watch our 2-minute highlight reel showcasing the best moments from our dance documentation journey.
           </p>
-          <div className="max-w-3xl mx-auto aspect-video bg-foreground/10 rounded-xl flex items-center justify-center border border-earth-foreground/20">
-            <div className="text-center">
-              <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4 hover:bg-primary/30 transition-colors cursor-pointer">
-                <Play className="h-8 w-8 text-gold" />
-              </div>
-              <p className="text-sm opacity-60">Video placeholder — embed your highlight reel here</p>
-            </div>
+          <div className="max-w-3xl mx-auto">
+            <VideoEmbed storageKey="home-highlight-reel" title="Upload your highlight reel" />
           </div>
         </div>
-      </section>
-
-      {/* Due date */}
-      <section className="py-10 bg-secondary text-secondary-foreground text-center">
-        <p className="font-display text-lg font-bold">
-          Project Due Date: <span className="text-accent">24 April 2026</span>
-        </p>
       </section>
     </div>
   );
