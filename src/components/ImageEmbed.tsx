@@ -21,11 +21,13 @@ const ImageEmbed = ({
   aspectRatio,
 }: ImageEmbedProps) => {
   const [customSrc, setCustomSrc] = useState(() => localStorage.getItem(storageKey) || "");
+  const [userModified] = useState(() => localStorage.getItem(`${storageKey}__modified`) === "true");
   const [editing, setEditing] = useState(false);
   const [urlInput, setUrlInput] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const displaySrc = customSrc || fallbackSrc;
+  // Only show fallback if user has never customized this slot
+  const displaySrc = customSrc || (userModified ? "" : fallbackSrc);
 
   const handleUrlSave = () => {
     const trimmed = urlInput.trim();
