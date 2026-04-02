@@ -10,7 +10,7 @@ const navLinks = [
   { to: "/dances/mohobelo", label: "Mohobelo" },
   { to: "/dances/litolobonya", label: "Litolobonya" },
   { to: "/dances/gumboots", label: "Gumboots" },
-  { to: "/dances/pharatlhatlha", label: "Pharatlhatlha" },
+  
   { to: "/about", label: "About" },
   { to: "/gallery", label: "Gallery" },
   { to: "/contact", label: "Contact" },

@@ -10,7 +10,7 @@ import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 import mohobeloImg from "@/assets/mohobelo.jpg";
 import litolobonyaImg from "@/assets/litolobonya.jpg";
 import gumbootsImg from "@/assets/gumboots.jpg";
-import pharatlhatlhaImg from "@/assets/pharatlhatlha.jpg";
+
 
 const dances = [
   {
@@ -40,13 +40,6 @@ const dances = [
     image: gumbootsImg,
     link: "/dances/gumboots",
     description: "Born in the mines, Gumboot dance uses rhythmic boot-slapping and stomping as a powerful form of communication and cultural expression.",
-  },
-  {
-    title: "Pharatlhatlha",
-    subtitle: "Basotho Rhythmic Dance",
-    image: pharatlhatlhaImg,
-    link: "/dances/pharatlhatlha",
-    description: "A fast-paced traditional Basotho dance featuring rapid footwork and energetic body movements that bring communities together.",
   },
 ];
 
@@ -104,7 +97,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-4">Featured Dances</h2>
           <p className="text-muted-foreground text-center mb-12 max-w-xl mx-auto">
-            Discover the five dance traditions we've researched and documented from the Mangaung community.
+            Discover the four dance traditions we've researched and documented from the Mangaung community.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {dances.map((dance, i) => (
