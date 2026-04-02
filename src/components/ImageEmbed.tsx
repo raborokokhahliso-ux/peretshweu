@@ -21,16 +21,21 @@ const ImageEmbed = ({
   aspectRatio,
 }: ImageEmbedProps) => {
   const [customSrc, setCustomSrc] = useState(() => localStorage.getItem(storageKey) || "");
+  const [userModified] = useState(() => localStorage.getItem(`${storageKey}__modified`) === "true");
   const [editing, setEditing] = useState(false);
   const [urlInput, setUrlInput] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const displaySrc = customSrc || fallbackSrc;
+  // Only show fallback if user has never customized this slot
+  const displaySrc = customSrc || (userModified ? "" : fallbackSrc);
+
+  const markModified = () => localStorage.setItem(`${storageKey}__modified`, "true");
 
   const handleUrlSave = () => {
     const trimmed = urlInput.trim();
     if (!trimmed) return;
     localStorage.setItem(storageKey, trimmed);
+    markModified();
     setCustomSrc(trimmed);
     setEditing(false);
     setUrlInput("");
@@ -43,6 +48,7 @@ const ImageEmbed = ({
     reader.onload = () => {
       const base64 = reader.result as string;
       localStorage.setItem(storageKey, base64);
+      markModified();
       setCustomSrc(base64);
       setEditing(false);
     };
@@ -51,6 +57,7 @@ const ImageEmbed = ({
 
   const handleRemove = () => {
     localStorage.removeItem(storageKey);
+    markModified();
     setCustomSrc("");
     setEditing(false);
   };
