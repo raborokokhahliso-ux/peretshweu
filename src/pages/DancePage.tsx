@@ -11,7 +11,7 @@ import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 import mohobeloImg from "@/assets/mohobelo.jpg";
 import litolobonyaImg from "@/assets/litolobonya.jpg";
 import gumbootsImg from "@/assets/gumboots.jpg";
-import litolobonya1 from "@/assets/litolobonya-1.jpg";
+import pharatlhatlhaImg from "@/assets/pharatlhatlha.jpg";
 import litolobonya2 from "@/assets/litolobonya-2.jpg";
 import litolobonya3 from "@/assets/litolobonya-3.jpg";
 import litolobonya4 from "@/assets/litolobonya-4.jpg";
