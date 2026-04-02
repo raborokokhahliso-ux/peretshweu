@@ -29,10 +29,13 @@ const ImageEmbed = ({
   // Only show fallback if user has never customized this slot
   const displaySrc = customSrc || (userModified ? "" : fallbackSrc);
 
+  const markModified = () => localStorage.setItem(`${storageKey}__modified`, "true");
+
   const handleUrlSave = () => {
     const trimmed = urlInput.trim();
     if (!trimmed) return;
     localStorage.setItem(storageKey, trimmed);
+    markModified();
     setCustomSrc(trimmed);
     setEditing(false);
     setUrlInput("");
