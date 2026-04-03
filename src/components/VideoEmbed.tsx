@@ -2,12 +2,10 @@ import { useState, useRef } from "react";
 import { Play, Link as LinkIcon, X, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useMedia } from "@/hooks/use-media";
 
 function getEmbedUrl(url: string): { type: "iframe" | "video"; src: string } | null {
   try {
-    // Base64 data URLs from file upload
-    if (url.startsWith("data:video/")) return { type: "video", src: url };
-
     const u = new URL(url);
     const ytMatch =
       u.hostname.includes("youtube.com") ? new URLSearchParams(u.search).get("v") :
@@ -31,44 +29,53 @@ interface VideoEmbedProps {
 }
 
 const VideoEmbed = ({ storageKey, title }: VideoEmbedProps) => {
-  const [url, setUrl] = useState(() => localStorage.getItem(storageKey) || "");
+  const { mediaUrl: url, loading, uploadFile, saveUrl, remove } = useMedia(storageKey);
   const [input, setInput] = useState("");
-  const [editing, setEditing] = useState(!url);
+  const [editing, setEditing] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const embed = url ? getEmbedUrl(url) : null;
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const trimmed = input.trim();
     if (!trimmed) return;
     const parsed = getEmbedUrl(trimmed);
     if (!parsed) return;
-    localStorage.setItem(storageKey, trimmed);
-    setUrl(trimmed);
+    await saveUrl(trimmed);
     setEditing(false);
   };
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      const base64 = reader.result as string;
-      localStorage.setItem(storageKey, base64);
-      setUrl(base64);
+    setUploading(true);
+    try {
+      const publicUrl = await uploadFile(file);
+      if (publicUrl) {
+        await saveUrl(publicUrl);
+      }
       setEditing(false);
-    };
-    reader.readAsDataURL(file);
+    } finally {
+      setUploading(false);
+    }
   };
 
-  const handleRemove = () => {
-    localStorage.removeItem(storageKey);
-    setUrl("");
+  const handleRemove = async () => {
+    await remove();
     setInput("");
     setEditing(true);
   };
 
-  if (!editing && embed) {
+  if (loading) {
+    return (
+      <div className="aspect-video bg-muted rounded-xl flex items-center justify-center border border-border animate-pulse">
+        <span className="text-muted-foreground text-sm">Loading...</span>
+      </div>
+    );
+  }
+
+  if (!editing && url && embed) {
     return (
       <div className="relative group">
         <div className="aspect-video rounded-xl overflow-hidden border border-border">
@@ -115,6 +122,9 @@ const VideoEmbed = ({ storageKey, title }: VideoEmbedProps) => {
         <Button size="sm" variant="outline" onClick={() => fileRef.current?.click()} className="w-full">
           <Upload className="h-4 w-4 mr-2" /> Upload from device
         </Button>
+        {!editing && !url && (
+          <p className="text-xs text-muted-foreground mt-2">Paste a link or upload a video file</p>
+        )}
       </div>
     </div>
   );

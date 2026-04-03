@@ -1,7 +1,8 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import { ImagePlus, X, Upload, Link as LinkIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useMedia } from "@/hooks/use-media";
 
 interface ImageEmbedProps {
   storageKey: string;
@@ -10,6 +11,7 @@ interface ImageEmbedProps {
   className?: string;
   overlayClassName?: string;
   aspectRatio?: string;
+  onImageClick?: (src: string) => void;
 }
 
 const ImageEmbed = ({
@@ -19,48 +21,52 @@ const ImageEmbed = ({
   className = "",
   overlayClassName = "",
   aspectRatio,
+  onImageClick,
 }: ImageEmbedProps) => {
-  const [customSrc, setCustomSrc] = useState(() => localStorage.getItem(storageKey) || "");
-  const [userModified] = useState(() => localStorage.getItem(`${storageKey}__modified`) === "true");
+  const { mediaUrl, loading, uploadFile, saveUrl, remove } = useMedia(storageKey);
   const [editing, setEditing] = useState(false);
   const [urlInput, setUrlInput] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
 
-  // Only show fallback if user has never customized this slot
-  const displaySrc = customSrc || (userModified ? "" : fallbackSrc);
+  // Show cloud URL, or fallback only if nothing saved yet
+  const displaySrc = mediaUrl || fallbackSrc || "";
 
-  const markModified = () => localStorage.setItem(`${storageKey}__modified`, "true");
-
-  const handleUrlSave = () => {
+  const handleUrlSave = async () => {
     const trimmed = urlInput.trim();
     if (!trimmed) return;
-    localStorage.setItem(storageKey, trimmed);
-    markModified();
-    setCustomSrc(trimmed);
+    await saveUrl(trimmed);
     setEditing(false);
     setUrlInput("");
   };
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      const base64 = reader.result as string;
-      localStorage.setItem(storageKey, base64);
-      markModified();
-      setCustomSrc(base64);
+    setUploading(true);
+    try {
+      const url = await uploadFile(file);
+      if (url) {
+        await saveUrl(url);
+      }
       setEditing(false);
-    };
-    reader.readAsDataURL(file);
+    } finally {
+      setUploading(false);
+    }
   };
 
-  const handleRemove = () => {
-    localStorage.removeItem(storageKey);
-    markModified();
-    setCustomSrc("");
+  const handleRemove = async () => {
+    await remove();
     setEditing(false);
   };
+
+  if (loading) {
+    return (
+      <div className={`bg-muted rounded-xl flex items-center justify-center border border-border animate-pulse ${aspectRatio || ""} ${className}`}>
+        <span className="text-muted-foreground text-sm">Loading...</span>
+      </div>
+    );
+  }
 
   if (editing) {
     return (
@@ -87,8 +93,8 @@ const ImageEmbed = ({
 
           {/* File upload */}
           <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleFileUpload} />
-          <Button size="sm" variant="outline" onClick={() => fileRef.current?.click()} className="w-full">
-            <Upload className="h-4 w-4 mr-2" /> Upload from device
+          <Button size="sm" variant="outline" onClick={() => fileRef.current?.click()} className="w-full" disabled={uploading}>
+            <Upload className="h-4 w-4 mr-2" /> {uploading ? "Uploading..." : "Upload from device"}
           </Button>
 
           {/* Cancel */}
@@ -116,12 +122,17 @@ const ImageEmbed = ({
 
   return (
     <div className={`relative group ${className}`}>
-      <img src={displaySrc} alt={alt} className={`w-full h-full object-cover ${overlayClassName}`} />
+      <img
+        src={displaySrc}
+        alt={alt}
+        className={`w-full h-full object-cover ${overlayClassName} ${onImageClick ? "cursor-pointer" : ""}`}
+        onClick={() => onImageClick && displaySrc && onImageClick(displaySrc)}
+      />
       <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-20">
         <Button size="icon" variant="secondary" className="h-8 w-8 bg-black/60 hover:bg-black/80 text-white border-0" onClick={() => setEditing(true)}>
           <ImagePlus className="h-4 w-4" />
         </Button>
-        {customSrc && (
+        {mediaUrl && (
           <Button size="icon" variant="destructive" className="h-8 w-8" onClick={handleRemove}>
             <X className="h-4 w-4" />
           </Button>
