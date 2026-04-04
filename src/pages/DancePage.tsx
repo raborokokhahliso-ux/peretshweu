@@ -1,10 +1,9 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom"; 
-import { ArrowLeft, Music, Palette, Users, X, ChevronLeft, ChevronRight, ImagePlus, Upload, Link as LinkIcon } from "lucide-react";
+import { ArrowLeft, Music, Palette, Users, X, ChevronLeft, ChevronRight } from "lucide-react";
 import VideoEmbed from "@/components/VideoEmbed";
 import ImageEmbed from "@/components/ImageEmbed";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 
@@ -83,102 +82,52 @@ const danceData: Record<string, {
     photos: [gumboots1, gumboots2, gumboots3],
   },
   "pharatlhatlha": {
-    title: "Pharatlhatlha",
-    subtitle: "Traditional Basotho Rhythmic Dance",
+    title: "Setapa / Pharatlhatlha",
+    subtitle: "Traditional Setswana Dance",
     image: pharatlhatlhaImg,
-    history: "Pharatlhatlha is a traditional Basotho dance characterised by rapid, rhythmic movements and energetic footwork. Originating from the rural communities of the Free State and Lesotho, this dance has been performed at gatherings, celebrations, and social events for generations. It evolved as a form of communal entertainment and expression, reflecting the joy and vitality of Basotho culture.",
-    significance: "In the Mangaung community, Pharatlhatlha is performed during community celebrations, weddings, and cultural festivals. The dance brings people together, fostering social cohesion and cultural pride. It serves as a form of expression for both young and old, preserving the rhythmic traditions of the Basotho people.",
-    artistic: "Pharatlhatlha features fast-paced footwork, rapid hip movements, and energetic body shaking. The dance demands agility and stamina, with performers moving in synchronised patterns that create a visually dynamic spectacle.",
-    music: "Traditional drums, hand clapping, and vocal chanting drive the fast-paced rhythm of the dance.",
-    costumes: "Traditional Basotho attire including blankets, skirts, and beaded accessories. Dancers often wear ankle rattles to accentuate footwork.",
-    choreography: "Fast-paced group formations with rapid footwork sequences, hip movements, and synchronised body shaking in call-and-response patterns.",
+    history: "Setapa is a traditional Setswana dance that is also known as Pharatlhatlha in some communities. It comes from long-standing community celebrations across Setswana-speaking regions and is recognised for its lively rhythm, grounded movement, and energetic group performance. Over time, the dance has remained an important cultural expression at gatherings, ceremonies, and festive occasions.",
+    significance: "In the Mangaung community, Setapa / Pharatlhatlha helps preserve Setswana identity, community memory, and shared celebration. It is performed at cultural events, heritage days, weddings, and public performances, where it brings generations together through movement, rhythm, and pride in tradition.",
+    artistic: "Setapa / Pharatlhatlha is known for strong footwork, fast rhythmic patterns, coordinated group timing, and expressive body movement. The dance creates a powerful visual effect through repetition, tempo changes, and communal energy.",
+    music: "Hand clapping, vocal calls, traditional percussion, and strong rhythmic chanting support the pace and energy of the dance.",
+    costumes: "Traditional Setswana-inspired attire, patterned garments, skirts, blankets, beadwork, and accessories that emphasise movement and cultural identity.",
+    choreography: "Energetic group formations with quick footwork, grounded steps, repeated rhythmic phrases, and coordinated movement that highlights stamina and unity.",
     photos: [],
   },
 };
 
-/** Sub-component for gallery with user-added photos */
+const EXTRA_PHOTO_SLOTS = 4;
+
 const GalleryWithCustomPhotos = ({
   slug, builtInPhotos, title, onPhotoClick,
 }: {
   slug: string; builtInPhotos: string[]; title: string;
-  onPhotoClick: (allPhotos: string[], index: number) => void;
+  onPhotoClick: (src: string) => void;
 }) => {
-  const storageKey = `dance-gallery-${slug}`;
-  const [customPhotos, setCustomPhotos] = useState<string[]>(() => {
-    try { return JSON.parse(localStorage.getItem(storageKey) || "[]"); } catch { return []; }
-  });
-  const [adding, setAdding] = useState(false);
-  const [urlInput, setUrlInput] = useState("");
-  const fileRef = useRef<HTMLInputElement>(null);
-
-  const allPhotos = [...builtInPhotos, ...customPhotos];
-
-  const addUrl = () => {
-    const trimmed = urlInput.trim();
-    if (!trimmed) return;
-    const next = [...customPhotos, trimmed];
-    localStorage.setItem(storageKey, JSON.stringify(next));
-    setCustomPhotos(next);
-    setUrlInput("");
-    setAdding(false);
-  };
-
-  const addFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      const next = [...customPhotos, reader.result as string];
-      localStorage.setItem(storageKey, JSON.stringify(next));
-      setCustomPhotos(next);
-      setAdding(false);
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const removeCustom = (idx: number) => {
-    const next = customPhotos.filter((_, i) => i !== idx);
-    localStorage.setItem(storageKey, JSON.stringify(next));
-    setCustomPhotos(next);
-  };
+  const slots = [
+    ...builtInPhotos.map((photo, index) => ({
+      key: `dance-gallery-${slug}-${index + 1}`,
+      fallback: photo,
+      alt: `${title} photo ${index + 1}`,
+    })),
+    ...Array.from({ length: EXTRA_PHOTO_SLOTS }, (_, index) => ({
+      key: `dance-gallery-${slug}-extra-${index + 1}`,
+      fallback: undefined,
+      alt: `${title} extra photo ${index + 1}`,
+    })),
+  ];
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-      {allPhotos.map((photo, i) => (
-        <div key={i} className="relative group aspect-square overflow-hidden rounded-lg border border-border cursor-pointer" onClick={() => onPhotoClick(allPhotos, i)}>
-          <img src={photo} alt={`${title} photo ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-          {i >= builtInPhotos.length && (
-            <button
-              className="absolute top-1 right-1 z-10 bg-destructive text-destructive-foreground rounded-full h-6 w-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-              onClick={(e) => { e.stopPropagation(); removeCustom(i - builtInPhotos.length); }}
-            >
-              <X className="h-3 w-3" />
-            </button>
-          )}
-        </div>
+      {slots.map((slot) => (
+        <ImageEmbed
+          key={slot.key}
+          storageKey={slot.key}
+          fallbackSrc={slot.fallback}
+          alt={slot.alt}
+          className="aspect-square overflow-hidden rounded-lg border border-border"
+          onImageClick={onPhotoClick}
+        />
       ))}
-      {/* Add photo card */}
-      {adding ? (
-        <div className="aspect-square bg-muted rounded-lg border border-border p-4 flex items-center justify-center">
-          <div className="text-center w-full">
-            <Input placeholder="Paste image URL" value={urlInput} onChange={(e) => setUrlInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && addUrl()} className="text-sm mb-2" />
-            <Button size="sm" onClick={addUrl} disabled={!urlInput.trim()} className="w-full mb-2"><LinkIcon className="h-4 w-4 mr-1" /> Add URL</Button>
-            <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={addFile} />
-            <Button size="sm" variant="outline" onClick={() => fileRef.current?.click()} className="w-full mb-2"><Upload className="h-4 w-4 mr-1" /> Upload</Button>
-            <Button size="sm" variant="ghost" onClick={() => setAdding(false)} className="w-full text-muted-foreground">Cancel</Button>
-          </div>
-        </div>
-      ) : (
-        <div
-          className="aspect-square bg-muted rounded-lg border border-dashed border-border flex items-center justify-center cursor-pointer hover:bg-muted/80 transition-colors"
-          onClick={() => setAdding(true)}
-        >
-          <div className="text-center">
-            <ImagePlus className="h-8 w-8 text-muted-foreground mx-auto mb-1" />
-            <span className="text-muted-foreground text-xs">Add Photo</span>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
@@ -272,9 +221,9 @@ const DancePage = () => {
               slug={slug || ""}
               builtInPhotos={dance.photos || []}
               title={dance.title}
-              onPhotoClick={(allPhotos, index) => {
-                setAllDisplayPhotos(allPhotos);
-                setLightboxIndex(index);
+              onPhotoClick={(src) => {
+                setAllDisplayPhotos([src]);
+                setLightboxIndex(0);
               }}
             />
           </div>
