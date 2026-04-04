@@ -35,14 +35,14 @@ const danceData: Record<string, {
 }> = {
   "mokhibo": {
     title: "Mokhibo",
-    subtitle: "Traditional Sotho Dance",
+    subtitle: "Traditional Basotho Women's Dance",
     image: hoKgibaImg,
-    history: "Mokhibo is a traditional Basotho women's dance that has been performed for centuries in the Free State region of South Africa. Rooted in the customs of the Basotho people, this dance form evolved from communal celebrations and rites of passage. It has been passed down through generations as an integral part of Sesotho cultural identity, adapting over time while maintaining its core movements and spiritual significance.",
-    significance: "In the Mangaung community, Mokhibo plays a vital role in ceremonies such as weddings, harvest festivals, and initiation celebrations. The dance strengthens community bonds and serves as a form of storytelling, preserving the oral traditions and histories of the Basotho people. It is often performed to honour ancestors and mark important life transitions.",
-    artistic: "Mokhibo is characterised by rhythmic knee movements performed while kneeling, expressive arm movements, and call-and-response singing. Performers wear traditional Basotho blankets, beaded jewellery, and grass skirts.",
-    music: "Traditional drums (moropa), ululations, and call-and-response chanting form the musical backbone.",
-    costumes: "Basotho blankets (seanamarena), beaded accessories, grass skirts, and mokorotlo (conical hat).",
-    choreography: "Synchronised group formations with dynamic footwork, rhythmic stamping, and expressive upper-body movements.",
+    history: "The mokgibo (also spelled mokhibo) is a traditional dance of the Basotho people, categorized as an indigenous performative genre specifically for women and young girls. In Sotho tradition, it is referred to as a papali (game or play), reflecting its role as a vital educational tool and a medium for social interaction. As a form of mmino wa setšo (traditional music and practices), the dance has been preserved through generations to maintain its cultural, philosophical, and spiritual integrity. The dance is unique because it is performed while sitting on the knees and lower legs — dancers move their heads and shoulders in unison to the rhythm while their hands are swept upwards and their bodies gently rise and fall. An informal choir typically stands behind the dancers, providing singing and rhythmic hand-clapping, and performers may use instruments such as drums (moropa), whistles (phala), and fly-whisks (lechoba).",
+    significance: "In the Mangaung community and across the Free State, Mokhibo plays a vital role in ceremonies, festivals, and cultural celebrations. Historically, its shoulder and hand movements were designed to prepare young maidens (baroetsana) for domestic duties such as grinding grain and carrying and soothing a baby. The dance teaches essential morals and life skills to the younger generation. In modern contexts, it is used to promote social cohesion between Sotho and Zulu cultures — for instance, the Nquthu Local Municipality hosts annual competitions bringing together different cultural activities. Mokgibo continues to be a central feature of events like the Morija Arts & Cultural Festival and the Zindala Zombili festival.",
+    artistic: "Mokhibo is characterised by rhythmic knee movements performed while kneeling, expressive arm movements, and call-and-response singing. Dancers traditionally wear vibrant, matching costumes rich in symbolic colour — including internal skirts (lithethana or litolobonya) beneath large outer skirts (lifirisekoto), traditional hats (likuoane), and colourful beads that intensify the symbolic meaning of the performance.",
+    music: "An informal choir provides singing and rhythmic hand-clapping. Traditional drums (moropa), whistles (phala), and fly-whisks (lechoba) enhance the rhythm.",
+    costumes: "Basotho blankets (seanamarena), large outer skirts (lifirisekoto), internal skirts (lithethana), traditional hats (likuoane), and colourful beaded accessories.",
+    choreography: "Synchronised group formations performed while kneeling, with dynamic upper-body movements, rhythmic shoulder and hand gestures, and expressive rising and falling motions.",
     photos: [mokhibo1, mokhibo2, mokhibo3, mokhibo4],
   },
   "mohobelo": {
