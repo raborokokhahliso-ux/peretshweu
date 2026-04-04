@@ -23,14 +23,13 @@ const ImageEmbed = ({
   aspectRatio,
   onImageClick,
 }: ImageEmbedProps) => {
-  const { mediaUrl, loading, uploadFile, saveUrl, remove } = useMedia(storageKey);
+  const { mediaUrl, loading, uploadFile, saveUrl, remove, hasStoredValue, isRemoved } = useMedia(storageKey);
   const [editing, setEditing] = useState(false);
   const [urlInput, setUrlInput] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
 
-  // Show cloud URL, or fallback only if nothing saved yet
-  const displaySrc = mediaUrl || fallbackSrc || "";
+  const displaySrc = isRemoved ? "" : mediaUrl || (!hasStoredValue ? fallbackSrc || "" : "");
 
   const handleUrlSave = async () => {
     const trimmed = urlInput.trim();
@@ -57,6 +56,7 @@ const ImageEmbed = ({
 
   const handleRemove = async () => {
     await remove();
+    setUrlInput("");
     setEditing(false);
   };
 
@@ -128,11 +128,11 @@ const ImageEmbed = ({
         className={`w-full h-full object-cover ${overlayClassName} ${onImageClick ? "cursor-pointer" : ""}`}
         onClick={() => onImageClick && displaySrc && onImageClick(displaySrc)}
       />
-      <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-20">
-        <Button size="icon" variant="secondary" className="h-8 w-8 bg-black/60 hover:bg-black/80 text-white border-0" onClick={() => setEditing(true)}>
+      <div className="absolute top-2 right-2 z-20 flex gap-1 opacity-100 transition-opacity md:opacity-0 md:group-hover:opacity-100">
+        <Button size="icon" variant="secondary" className="h-8 w-8 border-0 bg-foreground/70 text-background hover:bg-foreground/90" onClick={() => setEditing(true)}>
           <ImagePlus className="h-4 w-4" />
         </Button>
-        {mediaUrl && (
+        {displaySrc && (
           <Button size="icon" variant="destructive" className="h-8 w-8" onClick={handleRemove}>
             <X className="h-4 w-4" />
           </Button>
