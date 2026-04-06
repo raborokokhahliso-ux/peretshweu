@@ -1,8 +1,10 @@
+import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpen, FileText } from "lucide-react";
+import { BookOpen, FileText, Plus, Minus } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import ImageEmbed from "@/components/ImageEmbed";
-
+import VideoEmbed from "@/components/VideoEmbed";
 const teamRoles = [
   { name: "Mbali", role: "Project Manager", desc: "Oversees project timeline, deliverables, and team coordination.", key: "team-mbali" },
   { name: "Mabusha", role: "Risk Manager", desc: "Identifies, assesses, and mitigates project risks.", key: "team-mabusha" },
