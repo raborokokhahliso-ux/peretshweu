@@ -48,7 +48,23 @@ const researchDocuments = [
   },
 ];
 
-const About = () => (
+const STAKE_PHOTO_KEY = "stakeholder-photo-count";
+const STAKE_VIDEO_KEY = "stakeholder-video-count";
+
+const About = () => {
+  const [photoCount, setPhotoCount] = useState(() => {
+    const saved = localStorage.getItem(STAKE_PHOTO_KEY);
+    return saved ? Math.max(parseInt(saved, 10), 1) : 3;
+  });
+  const [videoCount, setVideoCount] = useState(() => {
+    const saved = localStorage.getItem(STAKE_VIDEO_KEY);
+    return saved ? Math.max(parseInt(saved, 10), 1) : 2;
+  });
+
+  useEffect(() => { localStorage.setItem(STAKE_PHOTO_KEY, String(photoCount)); }, [photoCount]);
+  useEffect(() => { localStorage.setItem(STAKE_VIDEO_KEY, String(videoCount)); }, [videoCount]);
+
+  return (
   <div>
     <section className="py-20 bg-earth text-earth-foreground">
       <div className="container mx-auto px-4 text-center">
