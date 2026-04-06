@@ -26,7 +26,7 @@ const Footer = () => (
             <li><Link to="/dances/mohobelo" className="hover:text-gold transition-colors">Mohobelo</Link></li>
             <li><Link to="/dances/litolobonya" className="hover:text-gold transition-colors">Litolobonya</Link></li>
             <li><Link to="/dances/gumboots" className="hover:text-gold transition-colors">Gumboots</Link></li>
-            
+            <li><Link to="/dances/pharatlhatlha" className="hover:text-gold transition-colors">Setapa / Pharatlhatlha</Link></li>
           </ul>
         </div>
       </div>
