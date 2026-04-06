@@ -8,7 +8,7 @@ import Index from "./pages/Index";
 import DancePage from "./pages/DancePage";
 import About from "./pages/About";
 import Gallery from "./pages/Gallery";
-import Contact from "./pages/Contact";
+
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
