@@ -8,7 +8,7 @@ import Index from "./pages/Index";
 import DancePage from "./pages/DancePage";
 import About from "./pages/About";
 import Gallery from "./pages/Gallery";
-import Contact from "./pages/Contact";
+
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,7 +25,7 @@ const App = () => (
             <Route path="/dances/:slug" element={<DancePage />} />
             <Route path="/about" element={<About />} />
             <Route path="/gallery" element={<Gallery />} />
-            <Route path="/contact" element={<Contact />} />
+            
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
