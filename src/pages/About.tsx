@@ -3,12 +3,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, FileText } from "lucide-react";
 
 const teamRoles = [
-  { role: "Project Manager", desc: "Oversees project timeline, deliverables, and team coordination." },
-  { role: "Risk Manager", desc: "Identifies, assesses, and mitigates project risks." },
-  { role: "Communications Officer", desc: "Manages stakeholder engagement and project communications." },
-  { role: "Financial Controller", desc: "Handles budget planning, tracking, and procurement." },
-  { role: "Content Director", desc: "Curates research content, multimedia, and written narratives." },
-  { role: "Technical Lead", desc: "Develops and maintains the digital platform." },
+  { name: "Mbali", role: "Project Manager", desc: "Oversees project timeline, deliverables, and team coordination." },
+  { name: "Mabusha", role: "Risk Manager", desc: "Identifies, assesses, and mitigates project risks." },
+  { name: "Prince", role: "Communications Officer", desc: "Manages stakeholder engagement and project communications." },
+  { name: "Cody", role: "Financial Officer", desc: "Handles budget planning, tracking, and procurement." },
+  { name: "Kgaogelo", role: "Content Director", desc: "Curates research content, multimedia, and written narratives." },
+  { name: "Khahliso", role: "Technical Lead", desc: "Develops and maintains the digital platform." },
+  { name: "Calvin", role: "Technical Lead", desc: "Develops and maintains the digital platform." },
 ];
 
 const researchDocuments = [
@@ -108,11 +109,11 @@ const About = () => (
             <Card key={member.role} className="border-0 shadow-md hover:shadow-lg transition-shadow">
               <CardContent className="p-6 text-center">
                 <div className="w-16 h-16 rounded-full bg-primary/15 flex items-center justify-center mx-auto mb-4">
-                  <span className="font-display text-xl font-bold text-primary">{member.role[0]}</span>
+                  <span className="font-display text-xl font-bold text-primary">{member.name[0]}</span>
                 </div>
+                <h3 className="font-display font-bold text-lg">{member.name}</h3>
                 <Badge className="bg-secondary text-secondary-foreground mb-2">{member.role}</Badge>
                 <p className="text-muted-foreground text-sm mt-2">{member.desc}</p>
-                <p className="text-xs text-muted-foreground/60 mt-2 italic">Team member name TBD</p>
               </CardContent>
             </Card>
           ))}
