@@ -107,9 +107,11 @@ const About = () => (
         <h2 className="font-display text-2xl md:text-3xl font-bold mb-8 text-center">Team Members</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {teamRoles.map((member) => (
-            <Card key={member.role} className="border-0 shadow-md hover:shadow-lg transition-shadow">
+            <Card key={member.key} className="border-0 shadow-md hover:shadow-lg transition-shadow">
               <CardContent className="p-6 text-center">
-                <img src={member.photo} alt={member.name} loading="lazy" width={512} height={512} className="w-20 h-20 rounded-full object-cover mx-auto mb-4" />
+                <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
+                  <ImageEmbed storageKey={member.key} className="w-full h-full object-cover rounded-full" />
+                </div>
                 <h3 className="font-display font-bold text-lg">{member.name}</h3>
                 <Badge className="bg-secondary text-secondary-foreground mb-2">{member.role}</Badge>
                 <p className="text-muted-foreground text-sm mt-2">{member.desc}</p>
