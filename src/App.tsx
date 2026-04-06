@@ -25,7 +25,7 @@ const App = () => (
             <Route path="/dances/:slug" element={<DancePage />} />
             <Route path="/about" element={<About />} />
             <Route path="/gallery" element={<Gallery />} />
-            <Route path="/contact" element={<Contact />} />
+            
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
