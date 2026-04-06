@@ -1,15 +1,22 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, FileText } from "lucide-react";
+import teamMbali from "@/assets/team-mbali.jpg";
+import teamMabusha from "@/assets/team-mabusha.jpg";
+import teamPrince from "@/assets/team-prince.jpg";
+import teamCody from "@/assets/team-cody.jpg";
+import teamKgaogelo from "@/assets/team-kgaogelo.jpg";
+import teamKhahliso from "@/assets/team-khahliso.jpg";
+import teamCalvin from "@/assets/team-calvin.jpg";
 
 const teamRoles = [
-  { name: "Mbali", role: "Project Manager", desc: "Oversees project timeline, deliverables, and team coordination." },
-  { name: "Mabusha", role: "Risk Manager", desc: "Identifies, assesses, and mitigates project risks." },
-  { name: "Prince", role: "Communications Officer", desc: "Manages stakeholder engagement and project communications." },
-  { name: "Cody", role: "Financial Officer", desc: "Handles budget planning, tracking, and procurement." },
-  { name: "Kgaogelo", role: "Content Director", desc: "Curates research content, multimedia, and written narratives." },
-  { name: "Khahliso", role: "Technical Lead", desc: "Develops and maintains the digital platform." },
-  { name: "Calvin", role: "Technical Lead", desc: "Develops and maintains the digital platform." },
+  { name: "Mbali", role: "Project Manager", desc: "Oversees project timeline, deliverables, and team coordination.", photo: teamMbali },
+  { name: "Mabusha", role: "Risk Manager", desc: "Identifies, assesses, and mitigates project risks.", photo: teamMabusha },
+  { name: "Prince", role: "Communications Officer", desc: "Manages stakeholder engagement and project communications.", photo: teamPrince },
+  { name: "Cody", role: "Financial Officer", desc: "Handles budget planning, tracking, and procurement.", photo: teamCody },
+  { name: "Kgaogelo", role: "Content Director", desc: "Curates research content, multimedia, and written narratives.", photo: teamKgaogelo },
+  { name: "Khahliso", role: "Technical Lead", desc: "Develops and maintains the digital platform.", photo: teamKhahliso },
+  { name: "Calvin", role: "Technical Lead", desc: "Develops and maintains the digital platform.", photo: teamCalvin },
 ];
 
 const researchDocuments = [
