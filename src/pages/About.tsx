@@ -3,12 +3,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, FileText } from "lucide-react";
 
 const teamRoles = [
-  { role: "Project Manager", desc: "Oversees project timeline, deliverables, and team coordination." },
-  { role: "Risk Manager", desc: "Identifies, assesses, and mitigates project risks." },
-  { role: "Communications Officer", desc: "Manages stakeholder engagement and project communications." },
-  { role: "Financial Controller", desc: "Handles budget planning, tracking, and procurement." },
-  { role: "Content Director", desc: "Curates research content, multimedia, and written narratives." },
-  { role: "Technical Lead", desc: "Develops and maintains the digital platform." },
+  { name: "Mbali", role: "Project Manager", desc: "Oversees project timeline, deliverables, and team coordination." },
+  { name: "Mabusha", role: "Risk Manager", desc: "Identifies, assesses, and mitigates project risks." },
+  { name: "Prince", role: "Communications Officer", desc: "Manages stakeholder engagement and project communications." },
+  { name: "Cody", role: "Financial Officer", desc: "Handles budget planning, tracking, and procurement." },
+  { name: "Kgaogelo", role: "Content Director", desc: "Curates research content, multimedia, and written narratives." },
+  { name: "Khahliso", role: "Technical Lead", desc: "Develops and maintains the digital platform." },
+  { name: "Calvin", role: "Technical Lead", desc: "Develops and maintains the digital platform." },
 ];
 
 const researchDocuments = [
