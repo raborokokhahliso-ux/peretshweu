@@ -127,8 +127,8 @@ const About = () => {
           {teamRoles.map((member) => (
             <Card key={member.key} className="border-0 shadow-md hover:shadow-lg transition-shadow">
               <CardContent className="p-6 text-center">
-                <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
-                  <ImageEmbed storageKey={member.key} className="w-full h-full object-cover rounded-full" />
+              <div className="mx-auto mb-4 relative">
+                  <ImageEmbed storageKey={member.key} className="w-24 h-24 mx-auto rounded-full overflow-hidden" overlayClassName="object-cover" />
                 </div>
                 <h3 className="font-display font-bold text-lg">{member.name}</h3>
                 <Badge className="bg-secondary text-secondary-foreground mb-2">{member.role}</Badge>
