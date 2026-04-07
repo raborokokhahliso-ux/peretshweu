@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom"; 
-import { ArrowLeft, Music, Palette, Users, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, Music, Palette, Users, X, ChevronLeft, ChevronRight, Plus, Minus } from "lucide-react";
 import VideoEmbed from "@/components/VideoEmbed";
 import ImageEmbed from "@/components/ImageEmbed";
 import { Button } from "@/components/ui/button";
@@ -93,9 +93,19 @@ const danceData: Record<string, {
     choreography: "Dancers perform in pairs in the middle of a circular formation of singers and clappers. A small metal whistle is used to spice the performance. Energetic group formations with quick footwork, grounded steps, repeated rhythmic phrases, and coordinated movement highlighting stamina and unity.",
     photos: [],
   },
+  "borankana": {
+    title: "Borankana",
+    subtitle: "Traditional Tswana Dance (Phathisi)",
+    image: pharatlhatlhaImg,
+    history: "Borankana refers to a traditional music and dance form usually practiced or performed by the Bakwena tribe in the Kweneng District of Botswana (Molepolelo). It is strongly connected to the culture of Botswana, and is also known as Phathisi. Borankana is traditionally performed by both elderly and young people. According to history, Borankana was performed during tribal activities only. It is believed that originally only men and boys danced whilst the females sang, clapped hands and ululated during performances. Borankana performances are estimated to have been initiated around 1914–1916. The name Phathisi comes from the practice of a man tying down the lowest part of his trouser using a peg when cycling. In the past, men used to work in mines using bicycles, and owning a bicycle meant you were wealthy enough to purchase one — the trouser had to be tied hard to avoid the rider toppling or the trouser being hooked by the chain. This same process of trouser pegging was adopted into Borankana performances, later evolving from pegging trousers to wearing shorts.",
+    significance: "The relationship between Borankana and the Mangaung Municipality is rooted in cultural identity and social history. Mangaung includes Thaba Nchu, a major historical hub for the Barolong (Tswana tribe), where traditional dances like Borankana are central to the social and ceremonial life of residents. The 'Phathisi' style is historically linked to the South African mines — mine workers used to hook their pants with clips to avoid them catching in bicycle chains while traveling to work, and this practical act adapted into a unique rhythmic leg-stamping style in the dance. The Municipality mostly displays Borankana during heritage celebrations, diplomatic occurrences, and community festivals to foster local Tswana culture.",
+    artistic: "Borankana is characterised by energetic leg-stamping rhythms derived from the miners' cycling tradition. The dance features powerful, grounded footwork with rhythmic stomping patterns that echo the practical origins of trouser pegging. Both men and women participate, with vocals, hand-clapping, and ululation providing the musical backbone.",
+    music: "Hand clapping, vocal chanting, ululation, and rhythmic foot-stamping form the core musical elements of Borankana performances.",
+    costumes: "Short pants (originally adapted from the trouser-pegging tradition), traditional Tswana attire, and accessories that reflect the cultural heritage of the Bakwena tribe.",
+    choreography: "Energetic group formations featuring distinctive leg-stamping patterns, grounded footwork, and rhythmic sequences that reflect the dance's origins in the mining and cycling culture of early 20th-century South Africa.",
+    photos: [],
+  },
 };
-
-const EXTRA_PHOTO_SLOTS = 4;
 
 const GalleryWithCustomPhotos = ({
   slug, builtInPhotos, title, onPhotoClick,
@@ -103,13 +113,23 @@ const GalleryWithCustomPhotos = ({
   slug: string; builtInPhotos: string[]; title: string;
   onPhotoClick: (src: string) => void;
 }) => {
+  const storageCountKey = `dance-gallery-${slug}-extra-count`;
+  const [extraCount, setExtraCount] = useState(() => {
+    const saved = localStorage.getItem(storageCountKey);
+    return saved ? Math.max(parseInt(saved, 10), 0) : 4;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(storageCountKey, String(extraCount));
+  }, [extraCount, storageCountKey]);
+
   const slots = [
     ...builtInPhotos.map((photo, index) => ({
       key: `dance-gallery-${slug}-${index + 1}`,
       fallback: photo,
       alt: `${title} photo ${index + 1}`,
     })),
-    ...Array.from({ length: EXTRA_PHOTO_SLOTS }, (_, index) => ({
+    ...Array.from({ length: extraCount }, (_, index) => ({
       key: `dance-gallery-${slug}-extra-${index + 1}`,
       fallback: undefined,
       alt: `${title} extra photo ${index + 1}`,
@@ -117,17 +137,63 @@ const GalleryWithCustomPhotos = ({
   ];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-      {slots.map((slot) => (
-        <ImageEmbed
-          key={slot.key}
-          storageKey={slot.key}
-          fallbackSrc={slot.fallback}
-          alt={slot.alt}
-          className="aspect-square overflow-hidden rounded-lg border border-border"
-          onImageClick={onPhotoClick}
-        />
-      ))}
+    <div>
+      <div className="flex items-center gap-3 mb-4">
+        <span className="text-sm text-muted-foreground font-medium">Photo slots: {builtInPhotos.length + extraCount}</span>
+        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setExtraCount(c => c + 1)}>
+          <Plus className="h-4 w-4" />
+        </Button>
+        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setExtraCount(c => Math.max(0, c - 1))} disabled={extraCount === 0}>
+          <Minus className="h-4 w-4" />
+        </Button>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {slots.map((slot) => (
+          <ImageEmbed
+            key={slot.key}
+            storageKey={slot.key}
+            fallbackSrc={slot.fallback}
+            alt={slot.alt}
+            className="aspect-square overflow-hidden rounded-lg border border-border"
+            onImageClick={onPhotoClick}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const VideoGallery = ({ slug, title }: { slug: string; title: string }) => {
+  const storageCountKey = `dance-video-${slug}-extra-count`;
+  const [videoCount, setVideoCount] = useState(() => {
+    const saved = localStorage.getItem(storageCountKey);
+    return saved ? Math.max(parseInt(saved, 10), 1) : 1;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(storageCountKey, String(videoCount));
+  }, [videoCount, storageCountKey]);
+
+  return (
+    <div>
+      <div className="flex items-center gap-3 mb-4">
+        <span className="text-sm text-muted-foreground font-medium">Video slots: {videoCount}</span>
+        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setVideoCount(c => c + 1)}>
+          <Plus className="h-4 w-4" />
+        </Button>
+        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setVideoCount(c => Math.max(1, c - 1))} disabled={videoCount <= 1}>
+          <Minus className="h-4 w-4" />
+        </Button>
+      </div>
+      <div className="space-y-6">
+        {Array.from({ length: videoCount }, (_, i) => (
+          <VideoEmbed
+            key={`dance-video-${slug}-${i + 1}`}
+            storageKey={i === 0 ? `dance-video-${slug}` : `dance-video-${slug}-${i + 1}`}
+            title={`${title} Performance ${videoCount > 1 ? i + 1 : ""}`}
+          />
+        ))}
+      </div>
     </div>
   );
 };
@@ -208,10 +274,10 @@ const DancePage = () => {
             </div>
           </div>
 
-          {/* Video Placeholder */}
+          {/* Video */}
           <div className="mb-14">
-            <h2 className="font-display text-2xl md:text-3xl font-bold mb-6">Performance Video</h2>
-            <VideoEmbed key={slug} storageKey={`dance-video-${slug}`} title={`${dance.title} Performance`} />
+            <h2 className="font-display text-2xl md:text-3xl font-bold mb-6">Performance Videos</h2>
+            <VideoGallery slug={slug || ""} title={dance.title} />
           </div>
 
           {/* Photo Gallery */}
