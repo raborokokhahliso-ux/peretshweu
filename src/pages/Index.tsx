@@ -49,6 +49,13 @@ const dances = [
     link: "/dances/pharatlhatlha",
     description: "Setapa is a traditional Setswana dance, also known as Pharatlhatlha, celebrated for its fast footwork, rhythm, and strong communal energy.",
   },
+  {
+    title: "Borankana",
+    subtitle: "Traditional Tswana Dance (Phathisi)",
+    image: pharatlhatlhaImg,
+    link: "/dances/borankana",
+    description: "A traditional Tswana dance from the Bakwena tribe, historically linked to the mining culture and bicycle-riding traditions of early 20th-century South Africa.",
+  },
 ];
 
 const Index = () => {

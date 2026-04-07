@@ -11,7 +11,7 @@ const navLinks = [
   { to: "/dances/litolobonya", label: "Litolobonya" },
   { to: "/dances/gumboots", label: "Gumboots" },
   { to: "/dances/pharatlhatlha", label: "Setapa / Pharatlhatlha" },
-  
+  { to: "/dances/borankana", label: "Borankana" },
   { to: "/about", label: "About" },
   { to: "/gallery", label: "Gallery" },
   
