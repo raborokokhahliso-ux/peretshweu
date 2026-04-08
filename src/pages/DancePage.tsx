@@ -133,10 +133,10 @@ const GalleryWithCustomPhotos = ({
     <div>
       <div className="flex items-center gap-3 mb-4">
         <span className="text-sm text-muted-foreground font-medium">Photo slots: {builtInPhotos.length + extraCount}</span>
-        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setExtraCount(c => c + 1)}>
+        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setExtraCount(extraCount + 1)}>
           <Plus className="h-4 w-4" />
         </Button>
-        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setExtraCount(c => Math.max(0, c - 1))} disabled={extraCount === 0}>
+        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setExtraCount(Math.max(0, extraCount - 1))} disabled={extraCount === 0}>
           <Minus className="h-4 w-4" />
         </Button>
       </div>
@@ -163,10 +163,10 @@ const VideoGallery = ({ slug, title }: { slug: string; title: string }) => {
     <div>
       <div className="flex items-center gap-3 mb-4">
         <span className="text-sm text-muted-foreground font-medium">Video slots: {videoCount}</span>
-        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setVideoCount(c => c + 1)}>
+        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setVideoCount(videoCount + 1)}>
           <Plus className="h-4 w-4" />
         </Button>
-        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setVideoCount(c => Math.max(1, c - 1))} disabled={videoCount <= 1}>
+        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setVideoCount(Math.max(1, videoCount - 1))} disabled={videoCount <= 1}>
           <Minus className="h-4 w-4" />
         </Button>
       </div>
