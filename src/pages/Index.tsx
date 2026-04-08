@@ -126,7 +126,7 @@ const Index = () => {
                 <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-card">
                   <div className="relative h-64 overflow-hidden">
                     <ImageEmbed
-                      storageKey={`home-dance-card-${dance.title}`}
+                      storageKey={`dance-banner-${dance.slug}`}
                       fallbackSrc={dance.image}
                       alt={dance.title}
                       className="w-full h-64"
