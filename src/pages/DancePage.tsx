@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom"; 
 import { ArrowLeft, Music, Palette, Users, X, ChevronLeft, ChevronRight, Plus, Minus } from "lucide-react";
 import VideoEmbed from "@/components/VideoEmbed";
 import ImageEmbed from "@/components/ImageEmbed";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { useCloudCount } from "@/hooks/use-cloud-count";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 
 import mohobeloImg from "@/assets/mohobelo.jpg";
@@ -113,15 +114,7 @@ const GalleryWithCustomPhotos = ({
   slug: string; builtInPhotos: string[]; title: string;
   onPhotoClick: (src: string) => void;
 }) => {
-  const storageCountKey = `dance-gallery-${slug}-extra-count`;
-  const [extraCount, setExtraCount] = useState(() => {
-    const saved = localStorage.getItem(storageCountKey);
-    return saved ? Math.max(parseInt(saved, 10), 0) : 4;
-  });
-
-  useEffect(() => {
-    localStorage.setItem(storageCountKey, String(extraCount));
-  }, [extraCount, storageCountKey]);
+  const { count: extraCount, loaded, setCount: setExtraCount } = useCloudCount(`config-dance-gallery-${slug}-extra-count`, 4);
 
   const slots = [
     ...builtInPhotos.map((photo, index) => ({
@@ -164,15 +157,7 @@ const GalleryWithCustomPhotos = ({
 };
 
 const VideoGallery = ({ slug, title }: { slug: string; title: string }) => {
-  const storageCountKey = `dance-video-${slug}-extra-count`;
-  const [videoCount, setVideoCount] = useState(() => {
-    const saved = localStorage.getItem(storageCountKey);
-    return saved ? Math.max(parseInt(saved, 10), 1) : 1;
-  });
-
-  useEffect(() => {
-    localStorage.setItem(storageCountKey, String(videoCount));
-  }, [videoCount, storageCountKey]);
+  const { count: videoCount, setCount: setVideoCount } = useCloudCount(`config-dance-video-${slug}-count`, 1);
 
   return (
     <div>
