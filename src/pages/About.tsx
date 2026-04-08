@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, FileText, Plus, Minus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ImageEmbed from "@/components/ImageEmbed";
 import VideoEmbed from "@/components/VideoEmbed";
+import { useCloudCount } from "@/hooks/use-cloud-count";
 const teamRoles = [
   { name: "Mbali", role: "Project Manager", desc: "Oversees project timeline, deliverables, and team coordination.", key: "team-mbali" },
   { name: "Mabusha", role: "Risk Manager", desc: "Identifies, assesses, and mitigates project risks.", key: "team-mabusha" },
@@ -48,21 +49,9 @@ const researchDocuments = [
   },
 ];
 
-const STAKE_PHOTO_KEY = "stakeholder-photo-count";
-const STAKE_VIDEO_KEY = "stakeholder-video-count";
-
 const About = () => {
-  const [photoCount, setPhotoCount] = useState(() => {
-    const saved = localStorage.getItem(STAKE_PHOTO_KEY);
-    return saved ? Math.max(parseInt(saved, 10), 1) : 3;
-  });
-  const [videoCount, setVideoCount] = useState(() => {
-    const saved = localStorage.getItem(STAKE_VIDEO_KEY);
-    return saved ? Math.max(parseInt(saved, 10), 1) : 2;
-  });
-
-  useEffect(() => { localStorage.setItem(STAKE_PHOTO_KEY, String(photoCount)); }, [photoCount]);
-  useEffect(() => { localStorage.setItem(STAKE_VIDEO_KEY, String(videoCount)); }, [videoCount]);
+  const { count: photoCount, setCount: setPhotoCount } = useCloudCount("config-stakeholder-photo-count", 3);
+  const { count: videoCount, setCount: setVideoCount } = useCloudCount("config-stakeholder-video-count", 2);
 
   return (
   <div>
@@ -153,9 +142,9 @@ const About = () => {
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-display text-lg font-bold">Photos</h3>
             <div className="flex items-center gap-2">
-              <Button size="icon" variant="outline" className="h-8 w-8" onClick={() => setPhotoCount((c) => Math.max(1, c - 1))}><Minus className="h-4 w-4" /></Button>
+              <Button size="icon" variant="outline" className="h-8 w-8" onClick={() => setPhotoCount(Math.max(1, photoCount - 1))}><Minus className="h-4 w-4" /></Button>
               <span className="text-sm font-medium w-6 text-center">{photoCount}</span>
-              <Button size="icon" variant="outline" className="h-8 w-8" onClick={() => setPhotoCount((c) => c + 1)}><Plus className="h-4 w-4" /></Button>
+              <Button size="icon" variant="outline" className="h-8 w-8" onClick={() => setPhotoCount(photoCount + 1)}><Plus className="h-4 w-4" /></Button>
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -175,9 +164,9 @@ const About = () => {
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-display text-lg font-bold">Videos</h3>
             <div className="flex items-center gap-2">
-              <Button size="icon" variant="outline" className="h-8 w-8" onClick={() => setVideoCount((c) => Math.max(1, c - 1))}><Minus className="h-4 w-4" /></Button>
+              <Button size="icon" variant="outline" className="h-8 w-8" onClick={() => setVideoCount(Math.max(1, videoCount - 1))}><Minus className="h-4 w-4" /></Button>
               <span className="text-sm font-medium w-6 text-center">{videoCount}</span>
-              <Button size="icon" variant="outline" className="h-8 w-8" onClick={() => setVideoCount((c) => c + 1)}><Plus className="h-4 w-4" /></Button>
+              <Button size="icon" variant="outline" className="h-8 w-8" onClick={() => setVideoCount(videoCount + 1)}><Plus className="h-4 w-4" /></Button>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

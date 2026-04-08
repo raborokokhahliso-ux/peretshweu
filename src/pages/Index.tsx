@@ -18,6 +18,7 @@ const dances = [
     title: "Mokhibo",
     subtitle: "Traditional Sotho Dance",
     image: hoKgibaImg,
+    slug: "mokhibo",
     link: "/dances/mokhibo",
     description: "A vibrant traditional dance of the Basotho people, expressing joy and cultural pride through rhythmic movement.",
   },
@@ -25,6 +26,7 @@ const dances = [
     title: "Mohobelo",
     subtitle: "Basotho Men's Dance",
     image: mohobeloImg,
+    slug: "mohobelo",
     link: "/dances/mohobelo",
     description: "A powerful traditional men's dance featuring dramatic stomping and athletic choreography.",
   },
@@ -32,6 +34,7 @@ const dances = [
     title: "Litolobonya",
     subtitle: "Basotho Praise Dance",
     image: litolobonyaImg,
+    slug: "litolobonya",
     link: "/dances/litolobonya",
     description: "A traditional praise dance combining dramatic movement with oral poetry to honour ancestors and community leaders.",
   },
@@ -39,6 +42,7 @@ const dances = [
     title: "Gumboots",
     subtitle: "Isicathulo – Boot Dance",
     image: gumbootsImg,
+    slug: "gumboots",
     link: "/dances/gumboots",
     description: "Born in the mines, Gumboot dance uses rhythmic boot-slapping and stomping as a powerful form of communication and cultural expression.",
   },
@@ -46,6 +50,7 @@ const dances = [
     title: "Setapa / Pharatlhatlha",
     subtitle: "Traditional Setswana Dance",
     image: pharatlhatlhaImg,
+    slug: "pharatlhatlha",
     link: "/dances/pharatlhatlha",
     description: "Setapa is a traditional Setswana dance, also known as Pharatlhatlha, celebrated for its fast footwork, rhythm, and strong communal energy.",
   },
@@ -53,6 +58,7 @@ const dances = [
     title: "Borankana",
     subtitle: "Traditional Tswana Dance (Phathisi)",
     image: pharatlhatlhaImg,
+    slug: "borankana",
     link: "/dances/borankana",
     description: "A traditional Tswana dance from the Bakwena tribe, historically linked to the mining culture and bicycle-riding traditions of early 20th-century South Africa.",
   },
@@ -120,7 +126,7 @@ const Index = () => {
                 <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-card">
                   <div className="relative h-64 overflow-hidden">
                     <ImageEmbed
-                      storageKey={`home-dance-card-${dance.title}`}
+                      storageKey={`dance-banner-${dance.slug}`}
                       fallbackSrc={dance.image}
                       alt={dance.title}
                       className="w-full h-64"

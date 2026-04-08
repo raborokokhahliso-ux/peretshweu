@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom"; 
 import { ArrowLeft, Music, Palette, Users, X, ChevronLeft, ChevronRight, Plus, Minus } from "lucide-react";
 import VideoEmbed from "@/components/VideoEmbed";
 import ImageEmbed from "@/components/ImageEmbed";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { useCloudCount } from "@/hooks/use-cloud-count";
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 
 import mohobeloImg from "@/assets/mohobelo.jpg";
@@ -113,15 +114,7 @@ const GalleryWithCustomPhotos = ({
   slug: string; builtInPhotos: string[]; title: string;
   onPhotoClick: (src: string) => void;
 }) => {
-  const storageCountKey = `dance-gallery-${slug}-extra-count`;
-  const [extraCount, setExtraCount] = useState(() => {
-    const saved = localStorage.getItem(storageCountKey);
-    return saved ? Math.max(parseInt(saved, 10), 0) : 4;
-  });
-
-  useEffect(() => {
-    localStorage.setItem(storageCountKey, String(extraCount));
-  }, [extraCount, storageCountKey]);
+  const { count: extraCount, loaded, setCount: setExtraCount } = useCloudCount(`config-dance-gallery-${slug}-extra-count`, 4);
 
   const slots = [
     ...builtInPhotos.map((photo, index) => ({
@@ -140,10 +133,10 @@ const GalleryWithCustomPhotos = ({
     <div>
       <div className="flex items-center gap-3 mb-4">
         <span className="text-sm text-muted-foreground font-medium">Photo slots: {builtInPhotos.length + extraCount}</span>
-        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setExtraCount(c => c + 1)}>
+        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setExtraCount(extraCount + 1)}>
           <Plus className="h-4 w-4" />
         </Button>
-        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setExtraCount(c => Math.max(0, c - 1))} disabled={extraCount === 0}>
+        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setExtraCount(Math.max(0, extraCount - 1))} disabled={extraCount === 0}>
           <Minus className="h-4 w-4" />
         </Button>
       </div>
@@ -164,24 +157,16 @@ const GalleryWithCustomPhotos = ({
 };
 
 const VideoGallery = ({ slug, title }: { slug: string; title: string }) => {
-  const storageCountKey = `dance-video-${slug}-extra-count`;
-  const [videoCount, setVideoCount] = useState(() => {
-    const saved = localStorage.getItem(storageCountKey);
-    return saved ? Math.max(parseInt(saved, 10), 1) : 1;
-  });
-
-  useEffect(() => {
-    localStorage.setItem(storageCountKey, String(videoCount));
-  }, [videoCount, storageCountKey]);
+  const { count: videoCount, setCount: setVideoCount } = useCloudCount(`config-dance-video-${slug}-count`, 1);
 
   return (
     <div>
       <div className="flex items-center gap-3 mb-4">
         <span className="text-sm text-muted-foreground font-medium">Video slots: {videoCount}</span>
-        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setVideoCount(c => c + 1)}>
+        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setVideoCount(videoCount + 1)}>
           <Plus className="h-4 w-4" />
         </Button>
-        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setVideoCount(c => Math.max(1, c - 1))} disabled={videoCount <= 1}>
+        <Button size="icon" variant="outline" className="h-7 w-7" onClick={() => setVideoCount(Math.max(1, videoCount - 1))} disabled={videoCount <= 1}>
           <Minus className="h-4 w-4" />
         </Button>
       </div>
