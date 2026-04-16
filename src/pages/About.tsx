@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import ImageEmbed from "@/components/ImageEmbed";
 import VideoEmbed from "@/components/VideoEmbed";
 import { useCloudCount } from "@/hooks/use-cloud-count";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 const teamRoles = [
   { name: "Mbali", role: "Project Manager", desc: "Oversees project timeline, deliverables, and team coordination.", key: "team-mbali" },
   { name: "Mabusha", role: "Risk Manager", desc: "Identifies, assesses, and mitigates project risks.", key: "team-mabusha" },
@@ -52,6 +53,7 @@ const researchDocuments = [
 const About = () => {
   const { count: photoCount, setCount: setPhotoCount } = useCloudCount("config-stakeholder-photo-count", 3);
   const { count: videoCount, setCount: setVideoCount } = useCloudCount("config-stakeholder-video-count", 2);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
   <div>
@@ -117,7 +119,12 @@ const About = () => {
             <Card key={member.key} className="border-0 shadow-md hover:shadow-lg transition-shadow">
               <CardContent className="p-6 text-center">
               <div className="mx-auto mb-4 relative">
-                  <ImageEmbed storageKey={member.key} className="w-24 h-24 mx-auto rounded-full overflow-hidden" overlayClassName="object-cover" />
+                  <ImageEmbed
+                    storageKey={member.key}
+                    className="w-24 h-24 mx-auto rounded-full overflow-hidden"
+                    overlayClassName="object-cover"
+                    onImageClick={setSelectedImage}
+                  />
                 </div>
                 <h3 className="font-display font-bold text-lg">{member.name}</h3>
                 <Badge className="bg-secondary text-secondary-foreground mb-2">{member.role}</Badge>
@@ -142,7 +149,7 @@ const About = () => {
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-display text-lg font-bold">Photos</h3>
             <div className="flex items-center gap-2">
-              <Button size="icon" variant="outline" className="h-8 w-8" onClick={() => setPhotoCount(Math.max(1, photoCount - 1))}><Minus className="h-4 w-4" /></Button>
+              <Button size="icon" variant="outline" className="h-8 w-8" onClick={() => setPhotoCount(Math.max(1, photoCount - 1))} disabled={photoCount <= 1}><Minus className="h-4 w-4" /></Button>
               <span className="text-sm font-medium w-6 text-center">{photoCount}</span>
               <Button size="icon" variant="outline" className="h-8 w-8" onClick={() => setPhotoCount(photoCount + 1)}><Plus className="h-4 w-4" /></Button>
             </div>
@@ -164,7 +171,7 @@ const About = () => {
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-display text-lg font-bold">Videos</h3>
             <div className="flex items-center gap-2">
-              <Button size="icon" variant="outline" className="h-8 w-8" onClick={() => setVideoCount(Math.max(1, videoCount - 1))}><Minus className="h-4 w-4" /></Button>
+              <Button size="icon" variant="outline" className="h-8 w-8" onClick={() => setVideoCount(Math.max(1, videoCount - 1))} disabled={videoCount <= 1}><Minus className="h-4 w-4" /></Button>
               <span className="text-sm font-medium w-6 text-center">{videoCount}</span>
               <Button size="icon" variant="outline" className="h-8 w-8" onClick={() => setVideoCount(videoCount + 1)}><Plus className="h-4 w-4" /></Button>
             </div>
@@ -181,8 +188,25 @@ const About = () => {
         </div>
       </div>
     </section>
+    <Dialog open={!!selectedImage} onOpenChange={(open) => !open && setSelectedImage(null)}>
+      <DialogContent className="max-w-5xl border-0 bg-transparent p-0 shadow-none">
+        {selectedImage ? (
+          <img
+            src={selectedImage}
+            alt="Expanded stakeholder or team image"
+            className="max-h-[85vh] w-full rounded-xl object-contain"
+          />
+        ) : null}
+      </DialogContent>
+    </Dialog>
   </div>
-  );
+);
 };
 
 export default About;
+
+  
+
+      
+
+   
