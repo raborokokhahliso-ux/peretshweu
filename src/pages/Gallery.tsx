@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
-import { Plus } from "lucide-react";
+import { useState } from "react";
+import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import ImageEmbed from "@/components/ImageEmbed";
 import VideoEmbed from "@/components/VideoEmbed";
+import { useCloudCount } from "@/hooks/use-cloud-count";
 
 import hoKgibaImg from "@/assets/ho-kgiba.jpg";
 import mohobeloImg from "@/assets/mohobelo.jpg";
@@ -14,19 +16,16 @@ const defaultPhotos = [
   { key: "gallery-photo-3", fallback: galleryImg, alt: "Community Celebration" },
 ];
 
-const GALLERY_COUNT_KEY = "gallery-photo-count";
+const defaultVideoTitles = [
+  "Ho Kgiba Performance",
+  "Mohobelo Initiation Dance",
+  "Community Dance",
+];
 
 const Gallery = () => {
-  const [photoCount, setPhotoCount] = useState(() => {
-    const saved = localStorage.getItem(GALLERY_COUNT_KEY);
-    return saved ? Math.max(parseInt(saved, 10), defaultPhotos.length) : defaultPhotos.length;
-  });
-
-  useEffect(() => {
-    localStorage.setItem(GALLERY_COUNT_KEY, String(photoCount));
-  }, [photoCount]);
-
-  const addSlot = () => setPhotoCount((c) => c + 1);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const { count: photoCount, setCount: setPhotoCount } = useCloudCount("config-gallery-photo-count", defaultPhotos.length);
+  const { count: videoCount, setCount: setVideoCount } = useCloudCount("config-gallery-video-count", defaultVideoTitles.length);
 
   const photoSlots = Array.from({ length: photoCount }, (_, i) => {
     const def = defaultPhotos[i];
@@ -35,6 +34,13 @@ const Gallery = () => {
       fallback: def?.fallback,
       alt: def?.alt || `Gallery photo ${i + 1}`,
     };
+  });
+
+  const videoSlots = Array.from({ length: videoCount }, (_, i) => {
+    const title = defaultVideoTitles[i] || `Gallery video ${i + 1}`;
+    const storageKey = i < defaultVideoTitles.length ? `gallery-video-${defaultVideoTitles[i]}` : `gallery-video-${i + 1}`;
+
+    return { title, storageKey };
   });
 
   return (
@@ -50,7 +56,25 @@ const Gallery = () => {
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          <h2 className="font-display text-2xl md:text-3xl font-bold mb-8">Photos</h2>
+          <div className="mb-8 flex items-center justify-between gap-4">
+            <h2 className="font-display text-2xl md:text-3xl font-bold">Photos</h2>
+            <div className="flex items-center gap-2">
+              <Button
+                size="icon"
+                variant="outline"
+                className="h-8 w-8"
+                onClick={() => setPhotoCount(Math.max(1, photoCount - 1))}
+                disabled={photoCount <= 1}
+              >
+                <Minus className="h-4 w-4" />
+              </Button>
+              <span className="w-6 text-center text-sm font-medium">{photoCount}</span>
+              <Button size="icon" variant="outline" className="h-8 w-8" onClick={() => setPhotoCount(photoCount + 1)}>
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {photoSlots.map((slot) => (
               <ImageEmbed
@@ -59,33 +83,58 @@ const Gallery = () => {
                 fallbackSrc={slot.fallback}
                 alt={slot.alt}
                 className="aspect-square rounded-xl overflow-hidden"
+                onImageClick={setSelectedImage}
               />
             ))}
-
-            {/* Add new photo slot button */}
-            <button
-              onClick={addSlot}
-              className="aspect-square rounded-xl border-2 border-dashed border-border hover:border-primary/50 flex flex-col items-center justify-center gap-2 text-muted-foreground hover:text-primary transition-colors cursor-pointer bg-muted/30 hover:bg-muted/50"
-            >
-              <Plus className="h-8 w-8" />
-              <span className="text-sm font-medium">Add Photo</span>
-            </button>
           </div>
         </div>
       </section>
 
       <section className="py-16 bg-muted/50">
         <div className="container mx-auto px-4">
-          <h2 className="font-display text-2xl md:text-3xl font-bold mb-8">Videos</h2>
+          <div className="mb-8 flex items-center justify-between gap-4">
+            <h2 className="font-display text-2xl md:text-3xl font-bold">Videos</h2>
+            <div className="flex items-center gap-2">
+              <Button
+                size="icon"
+                variant="outline"
+                className="h-8 w-8"
+                onClick={() => setVideoCount(Math.max(1, videoCount - 1))}
+                disabled={videoCount <= 1}
+              >
+                <Minus className="h-4 w-4" />
+              </Button>
+              <span className="w-6 text-center text-sm font-medium">{videoCount}</span>
+              <Button size="icon" variant="outline" className="h-8 w-8" onClick={() => setVideoCount(videoCount + 1)}>
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {["Ho Kgiba Performance", "Mohobelo Initiation Dance", "Community Dance"].map((title) => (
-              <VideoEmbed key={title} storageKey={`gallery-video-${title}`} title={title} />
+            {videoSlots.map((slot) => (
+              <VideoEmbed key={slot.storageKey} storageKey={slot.storageKey} title={slot.title} />
             ))}
           </div>
         </div>
       </section>
+
+      <Dialog open={!!selectedImage} onOpenChange={(open) => !open && setSelectedImage(null)}>
+        <DialogContent className="max-w-5xl border-0 bg-transparent p-0 shadow-none">
+          {selectedImage ? (
+            <img
+              src={selectedImage}
+              alt="Expanded gallery image"
+              className="max-h-[85vh] w-full rounded-xl object-contain"
+            />
+          ) : null}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
 
 export default Gallery;
+  
+       
+             
